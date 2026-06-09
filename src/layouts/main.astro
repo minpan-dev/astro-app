@@ -23,7 +23,7 @@ import Footer from "@/components/Footer.astro"
   </head>
   <body class="min-h-screen bg-background text-foreground font-sans antialiased selection:bg-primary selection:text-primary-foreground flex flex-col">
     <Navbar client:load />
-    <main class="pt-24 pb-8">
+    <main class="flex-grow flex flex-col pt-24 pb-8">
       <slot />
     </main>
     <Footer />
