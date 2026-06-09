@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { ThemeToggle } from "./ThemeToggle";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -26,30 +27,33 @@ export default function Navbar() {
               minpan.dev
             </a>
           </div>
-          <nav className="hidden md:block">
-            <ul className="flex space-x-8">
-              <li>
-                <a href="/" className="text-muted-foreground hover:text-foreground transition-colors duration-200">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="/blog" className="text-muted-foreground hover:text-foreground transition-colors duration-200">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="/projects" className="text-muted-foreground hover:text-foreground transition-colors duration-200">
-                  Projects
-                </a>
-              </li>
-              <li>
-                <a href="/about" className="text-muted-foreground hover:text-foreground transition-colors duration-200">
-                  About
-                </a>
-              </li>
-            </ul>
-          </nav>
+          <div className="flex items-center gap-4">
+            <nav className="hidden md:block mr-4">
+              <ul className="flex space-x-8">
+                <li>
+                  <a href="/" className="text-muted-foreground hover:text-foreground transition-colors duration-200">
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a href="/blog" className="text-muted-foreground hover:text-foreground transition-colors duration-200">
+                    Blog
+                  </a>
+                </li>
+                <li>
+                  <a href="/projects" className="text-muted-foreground hover:text-foreground transition-colors duration-200">
+                    Projects
+                  </a>
+                </li>
+                <li>
+                  <a href="/about" className="text-muted-foreground hover:text-foreground transition-colors duration-200">
+                    About
+                  </a>
+                </li>
+              </ul>
+            </nav>
+            <ThemeToggle />
+          </div>
         </div>
       </div>
     </header>
