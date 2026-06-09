@@ -1,42 +1,24 @@
 ---
 import Layout from "../layouts/main.astro";
-import { Badge } from "@/components/ui/badge";
 ---
 
 <Layout>
-  {/* Ambient Background Glow */}
-  <div class="fixed inset-0 -z-10 flex items-center justify-center pointer-events-none overflow-hidden">
-    <div class="w-[40rem] h-[40rem] bg-primary/5 rounded-full blur-[120px] dark:bg-primary/10"></div>
-  </div>
-
-  <div class="min-h-[calc(100vh-16rem)] flex items-center justify-center px-4 sm:px-6 lg:px-8 relative z-10">
+  <div class="min-h-[calc(100vh-16rem)] flex items-center justify-center px-4 sm:px-6 lg:px-8">
     <section class="max-w-3xl text-center flex flex-col items-center">
-      
-      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground mb-8">
+      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground mb-6">
         Hi, I'm Min Pan.
       </h1>
-      
-      <div class="prose prose-zinc dark:prose-invert max-w-none text-lg leading-relaxed text-foreground/80 space-y-8 mb-12 text-center">
-        <p class="text-xl text-muted-foreground leading-relaxed font-medium">
-          A passionate frontend developer and designer crafting beautiful, high-performance digital experiences with an obsessive attention to detail.
-        </p>
-        
+      <p class="text-xl text-muted-foreground leading-relaxed mb-8">
+        A passionate frontend developer and designer crafting beautiful, high-performance digital experiences with an obsessive attention to detail and premium aesthetics.
+      </p>
+      <article class="prose prose-zinc dark:prose-invert max-w-none text-lg leading-relaxed text-foreground/80 space-y-6 mb-12 text-center">
         <p>
-          My focus lies at the intersection of design and engineering. I specialize in building robust applications using 
-          <Badge variant="secondary" className="mx-1 font-mono text-xs translate-y-[-1px]">React</Badge>, 
-          <Badge variant="secondary" className="mx-1 font-mono text-xs translate-y-[-1px]">Next.js</Badge>, and 
-          <Badge variant="secondary" className="mx-1 font-mono text-xs translate-y-[-1px]">Astro</Badge>. 
-          I don't just write code; I meticulously craft interfaces that feel alive, responsive, and deeply intuitive.
+          My journey into web development started with a simple fascination for how things look and feel on a screen. Over the years, I've cultivated a deep appreciation for the intersection of design and engineering. I don't just write code; I build interfaces that feel alive, responsive, and intuitive.
         </p>
-
         <p>
-          Currently, I'm exploring advanced CSS features like 
-          <Badge variant="outline" className="mx-1 font-mono text-xs translate-y-[-1px] text-muted-foreground border-border/50">View Transitions</Badge> and 
-          modern UI architectures leveraging 
-          <Badge variant="outline" className="mx-1 font-mono text-xs translate-y-[-1px] text-muted-foreground border-border/50">Tailwind CSS</Badge>. 
-          I believe that a great user experience is invisible—it requires sweating the small stuff, from subtle micro-interactions to perfect typography.
+          I believe that a great user experience is invisible. It requires sweating the small stuff—the micro-interactions, the subtle gradients, and the perfect typography.
         </p>
-      </div>
+      </article>
 
       <div class="flex items-center justify-center gap-8">
         <a 
