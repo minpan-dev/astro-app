@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import Layout from '../layouts/main.astro';
 
 const techStack = [
   'React', 'Next.js', 'Astro', 'TypeScript', 'Tailwind CSS', 
@@ -7,10 +7,7 @@ const techStack = [
 ];
 ---
 
-<BaseLayout 
-  title="About | minpan.dev" 
-  description="Learn more about Min Pan, a frontend developer and designer."
->
+<Layout>
   <div class="max-w-5xl mx-auto px-6 py-12 md:py-20">
     
     <header class="mb-12">
@@ -113,4 +110,4 @@ const techStack = [
 
     </div>
   </div>
-</BaseLayout>
+</Layout>
