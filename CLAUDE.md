@@ -23,6 +23,22 @@ To add new shadcn/ui components:
 pnpm dlx shadcn@latest add <component-name>
 ```
 
+## Git Conventions
+
+### Git Hooks (husky)
+- **pre-commit**: Runs `lint-staged` — formats (Prettier) and lints (ESLint) staged `.ts/.tsx/.astro` files. Commit is blocked if checks fail.
+- **commit-msg**: Runs `commitlint` with `@commitlint/config-conventional`. Enforces [Conventional Commits](https://www.conventionalcommits.org/) format.
+
+### Commit Message Format
+All commits MUST use: `type: description`
+
+Common types: `feat` `fix` `docs` `style` `refactor` `perf` `test` `chore` `ci` `build`
+
+Examples:
+- `feat: add user authentication`
+- `fix: resolve button alignment issue`
+- `chore: update dependencies`
+
 ## Code Architecture
 
 ### Routing (file-based)
