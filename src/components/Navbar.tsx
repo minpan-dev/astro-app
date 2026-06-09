@@ -39,6 +39,11 @@ export default function Navbar() {
                 </a>
               </li>
               <li>
+                <a href="/projects" className="text-muted-foreground hover:text-foreground transition-colors duration-200">
+                  Projects
+                </a>
+              </li>
+              <li>
                 <a href="/about" className="text-muted-foreground hover:text-foreground transition-colors duration-200">
                   About
                 </a>
