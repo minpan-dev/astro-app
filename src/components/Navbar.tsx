@@ -41,11 +41,7 @@ export default function Navbar() {
                     Projects
                   </a>
                 </li>
-                <li>
-                  <a href="/about" className="text-muted-foreground hover:text-foreground transition-colors duration-200">
-                    About
-                  </a>
-                </li>
+
               </ul>
             </nav>
             <ThemeToggle />
