@@ -1,0 +1,29 @@
+---
+import Layout from "../../layouts/main.astro";
+import { getCollection } from "astro:content";
+import BlogCard from "../../components/BlogCard.tsx";
+
+const allPosts = await getCollection("blog");
+const sortedPosts = allPosts.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+---
+
+<Layout>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">All Articles</h1>
+      <p class="text-xl text-muted-foreground">Thoughts, tutorials, and insights on design and engineering.</p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {sortedPosts.map((post) => (
+        <BlogCard 
+          title={post.data.title}
+          description={post.data.description}
+          date={post.data.publishDate}
+          slug={post.id}
+          tags={post.data.tags}
+        />
+      ))}
+    </div>
+  </div>
+</Layout>

@@ -1,17 +1,73 @@
 ---
-import Layout from "@/layouts/main.astro"
-import { Button } from "@/components/ui/button"
+import Layout from "../layouts/main.astro";
+import { getCollection } from "astro:content";
+import BlogCard from "../components/BlogCard.tsx";
+
+const allPosts = await getCollection("blog");
+const featuredPosts = allPosts.filter(post => post.data.featured).sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+const latestPosts = allPosts.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()).slice(0, 3);
 ---
 
 <Layout>
-  <div class="flex min-h-svh p-6">
-    <div class="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-      <div>
-        <h1 class="font-medium">Project ready!</h1>
-        <p>You may now add components and start building.</p>
-        <p>We've already added the button component for you.</p>
-        <Button client:load className="mt-2">Button</Button>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
+    
+    {/* Hero Section */}
+    <section class="py-20 text-center relative">
+      <div class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-background to-background"></div>
+      <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 animate-fade-in-up">
+        Design <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">Differently</span>
+      </h1>
+      <p class="text-xl text-muted-foreground max-w-2xl mx-auto mb-10 animate-fade-in-up [animation-delay:200ms]">
+        Exploring the intersection of modern web design, frontend engineering, and user experience.
+      </p>
+      <div class="flex justify-center gap-4 animate-fade-in-up [animation-delay:400ms]">
+        <a href="/blog" class="px-8 py-3 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors shadow-lg shadow-primary/25">
+          Read Articles
+        </a>
+        <a href="/about" class="px-8 py-3 rounded-full bg-secondary text-secondary-foreground font-medium hover:bg-secondary/80 transition-colors">
+          About Me
+        </a>
       </div>
-    </div>
+    </section>
+
+    {/* Featured Posts */}
+    {featuredPosts.length > 0 && (
+      <section>
+        <div class="flex items-center justify-between mb-8">
+          <h2 class="text-3xl font-bold tracking-tight">Featured</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredPosts.map((post) => (
+            <BlogCard 
+              title={post.data.title}
+              description={post.data.description}
+              date={post.data.publishDate}
+              slug={post.id}
+              tags={post.data.tags}
+            />
+          ))}
+        </div>
+      </section>
+    )}
+
+    {/* Latest Posts */}
+    <section>
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-3xl font-bold tracking-tight">Latest Articles</h2>
+        <a href="/blog" class="text-primary hover:underline font-medium">View all &rarr;</a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {latestPosts.map((post) => (
+          <BlogCard 
+            title={post.data.title}
+            description={post.data.description}
+            date={post.data.publishDate}
+            slug={post.id}
+            tags={post.data.tags}
+          />
+        ))}
+      </div>
+    </section>
+
   </div>
 </Layout>

@@ -1,15 +1,21 @@
 ---
 import "@/styles/global.css"
+import Navbar from "@/components/Navbar.tsx"
+import Footer from "@/components/Footer.astro"
 ---
 
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>Astro App</title>
+    <title>DesignBlog</title>
   </head>
-  <body>
-    <slot />
+  <body class="min-h-screen bg-background text-foreground font-sans antialiased selection:bg-primary selection:text-primary-foreground flex flex-col">
+    <Navbar client:load />
+    <main class="flex-grow pt-24 pb-12">
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>
