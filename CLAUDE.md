@@ -66,6 +66,7 @@ Examples:
 | `eslint.config.js` | ESLint flat config: recommended JS/TS + React Hooks |
 | `.prettierrc` | Prettier with Astro + Tailwind CSS plugins |
 | `components.json` | shadcn/ui configuration (component registry, aliases) |
+| `.mcp.json` | MCP server configs: shadcn (component tools), astro-docs (documentation) |
 
 ### Adding New Pages
 1. Create a `.astro` file in `src/pages/`
