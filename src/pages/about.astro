@@ -1,8 +1,6 @@
 ---
 import Layout from '../layouts/main.astro';
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 
 const techStack = [
   'React', 'Next.js', 'Astro', 'TypeScript', 'Tailwind CSS', 
@@ -11,74 +9,64 @@ const techStack = [
 ---
 
 <Layout>
-  <div class="max-w-5xl mx-auto px-6 py-12 md:py-20">
+  <div class="max-w-3xl mx-auto px-6 py-16 md:py-24">
     
-    <header class="mb-12">
-      <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-4">
-        About <span class="text-primary">Me</span>
+    <header class="mb-16">
+      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground mb-6">
+        About Me
       </h1>
-      <p class="text-muted-foreground text-lg">
-        A glimpse into my world of design, code, and everything in between.
+      <p class="text-xl text-muted-foreground leading-relaxed">
+        I'm Min Pan, a passionate frontend developer and designer crafting beautiful, high-performance digital experiences with an obsessive attention to detail and premium aesthetics.
       </p>
     </header>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 auto-rows-[auto]">
-      
-      <!-- Card 1: Intro -->
-      <Card className="col-span-1 md:col-span-2 min-h-[320px] relative overflow-hidden rounded-[2rem] border-border/80 bg-card/50 p-0 flex flex-col justify-end group shadow-xl">
-        <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/5 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-700 ease-in-out pointer-events-none"></div>
-        <div class="absolute -right-32 -top-32 w-96 h-96 bg-primary/20 blur-[120px] rounded-full group-hover:bg-primary/30 transition-colors duration-700 pointer-events-none"></div>
-        
-        <CardContent className="relative z-10 mt-12 p-8 md:p-10 pt-10">
-          <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 tracking-tight leading-[1.1]">
-            Hi, I'm Min Pan. <br/> 
-            <span class="text-muted-foreground">I build modern web.</span>
-          </h2>
-          <p class="text-muted-foreground text-lg md:text-xl max-w-xl leading-relaxed font-light mb-8">
-            A passionate frontend developer and designer crafting beautiful, high-performance digital experiences with an obsessive attention to detail and premium aesthetics.
-          </p>
-          
-          <div class="flex items-center gap-4">
-            <Button variant="outline" size="icon" className="rounded-full h-12 w-12 bg-secondary/50 border-border hover:bg-secondary hover:text-foreground" asChild>
-              <a href="https://github.com/minpan" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path></svg>
-              </a>
-            </Button>
-            <Button variant="outline" size="icon" className="rounded-full h-12 w-12 bg-secondary/50 border-border hover:bg-secondary hover:text-foreground" asChild>
-              <a href="mailto:hello@minpan.dev" aria-label="Email">
-                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>
-              </a>
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+    <article class="prose prose-zinc dark:prose-invert max-w-none mb-16 text-lg leading-relaxed text-foreground/80 space-y-6">
+      <p>
+        My journey into web development started with a simple fascination for how things look and feel on a screen. Over the years, I've cultivated a deep appreciation for the intersection of design and engineering. I don't just write code; I build interfaces that feel alive, responsive, and intuitive.
+      </p>
+      <p>
+        I believe that a great user experience is invisible. It requires sweating the small stuff—the micro-interactions, the subtle gradients, and the perfect typography. When I'm not coding, I'm usually exploring new design trends, tweaking my development environment, or diving into the latest web technologies.
+      </p>
+    </article>
 
-      <!-- Card 2: Tech Stack -->
-      <Card className="col-span-1 md:col-span-1 relative overflow-hidden rounded-[2rem] border-border/80 bg-card/50 p-0 flex flex-col group shadow-xl">
-        <div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] rounded-full group-hover:bg-primary/20 transition-colors duration-700 pointer-events-none"></div>
-        
-        <CardContent className="relative z-10 flex-1 p-8 pt-8">
-          <div class="flex items-center gap-3 mb-8">
-            <div class="p-2 rounded-xl bg-secondary/50 border border-border text-primary">
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75 2.25 12l4.179 2.25m0-4.5 5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0 4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0-5.571 3-5.571-3" />
-              </svg>
-            </div>
-            <CardTitle className="text-xl text-foreground tracking-tight">Tech Arsenal</CardTitle>
-          </div>
-          
-          <div class="flex flex-wrap gap-2.5">
-            {techStack.map(tech => (
-              <Badge variant="secondary" className="px-3.5 py-1.5 text-sm font-medium bg-secondary/80 hover:bg-secondary hover:scale-105 transition-all cursor-default text-muted-foreground hover:text-foreground backdrop-blur-md">
-                {tech}
-              </Badge>
-            ))}
-          </div>
-        </CardContent>
-        
-        <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none"></div>
-      </Card>
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold tracking-tight text-foreground mb-6">
+        Tech Arsenal
+      </h2>
+      <div class="flex flex-wrap gap-2.5">
+        {techStack.map(tech => (
+          <Badge variant="secondary" className="px-3.5 py-1.5 text-sm font-medium bg-secondary hover:bg-secondary/80 transition-colors text-muted-foreground hover:text-foreground">
+            {tech}
+          </Badge>
+        ))}
+      </div>
+    </section>
 
-    </div>
+    <section>
+      <h2 class="text-2xl font-bold tracking-tight text-foreground mb-6">
+        Connect
+      </h2>
+      <div class="flex items-center gap-8">
+        <a 
+          href="https://github.com/minpan" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="group flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors font-medium relative"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path></svg>
+          GitHub
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-foreground transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        <a 
+          href="mailto:hello@minpan.dev" 
+          class="group flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors font-medium relative"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>
+          Email
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-foreground transition-all duration-300 group-hover:w-full"></span>
+        </a>
+      </div>
+    </section>
+
   </div>
 </Layout>
