@@ -30,11 +30,7 @@ export default function Navbar() {
           <div className="flex items-center gap-4">
             <nav className="hidden md:block mr-4">
               <ul className="flex space-x-8">
-                <li>
-                  <a href="/" className="text-muted-foreground hover:text-foreground transition-colors duration-200">
-                    Home
-                  </a>
-                </li>
+
                 <li>
                   <a href="/blog" className="text-muted-foreground hover:text-foreground transition-colors duration-200">
                     Blog
