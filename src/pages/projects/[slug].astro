@@ -22,7 +22,7 @@ const { Content } = await render(entry);
 
     {/* Project Header Banner */}
     {entry.data.image && (
-      <div class="relative h-[200px] md:h-[320px] w-full overflow-hidden rounded-2xl border border-border/50 bg-muted shadow-lg">
+      <div class="relative max-w-xl mx-auto h-[150px] md:h-[240px] w-full overflow-hidden rounded-2xl border border-border/50 bg-muted shadow-md">
         <img
           src={entry.data.image}
           alt={entry.data.title}
