@@ -1,100 +1,116 @@
 ---
-import Layout from "../layouts/main.astro";
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const techStack = [
+  'React', 'Next.js', 'Astro', 'TypeScript', 'Tailwind CSS', 
+  'Framer Motion', 'Node.js', 'Figma', 'UI/UX Design', 'Vite', 'GraphQL'
+];
 ---
 
-<Layout>
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
-    {/* Intro Header */}
-    <section class="flex flex-col md:flex-row gap-12 items-center">
-      <div class="flex-grow space-y-6">
-        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">
-          Hi, I'm <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">Min Pan</span>
-        </h1>
-        <p class="text-xl text-muted-foreground leading-relaxed">
-          I am a software engineer, frontend designer, and creator of <a href="/" class="text-foreground font-semibold underline decoration-primary hover:text-primary transition-colors">minpan.dev</a>. I love building high-performance, aesthetically pleasing web experiences that blend engineering precision with premium UI/UX design.
-        </p>
-        <p class="text-muted-foreground leading-relaxed">
-          My work focused on modern frontend frameworks, server-less architectures, and creating responsive web layouts. I enjoy sharing my learning journey through writing articles on modern web design, performance optimization, and developer tools.
-        </p>
-      </div>
-      
-      {/* Profile Decorative Card */}
-      <div class="relative w-48 h-48 md:w-64 md:h-64 flex-shrink-0">
-        <div class="absolute inset-0 bg-gradient-to-tr from-primary to-accent rounded-3xl blur-lg opacity-40 animate-pulse"></div>
-        <div class="relative w-full h-full rounded-3xl border border-border/50 bg-card/60 backdrop-blur-md flex items-center justify-center p-6 shadow-xl">
-          <div class="text-center space-y-2">
-            <span class="text-6xl">👨‍💻</span>
-            <div class="font-bold text-lg">Min Pan</div>
-            <div class="text-xs text-muted-foreground">Developer & Designer</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    {/* Skills Section */}
-    <section class="space-y-6">
-      <h2 class="text-3xl font-bold tracking-tight">My Tech Stack</h2>
-      <p class="text-muted-foreground">Here are some of the technologies I work with daily to bring ideas to life:</p>
-      
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-        {[
-          { name: "Astro", icon: "🚀", level: "Expert" },
-          { name: "React / Next.js", icon: "⚛️", level: "Expert" },
-          { name: "TypeScript", icon: "📘", level: "Advanced" },
-          { name: "Tailwind CSS", icon: "🎨", level: "Expert" },
-          { name: "Node.js", icon: "🟢", level: "Advanced" },
-          { name: "PostgreSQL", icon: "🐘", level: "Intermediate" },
-          { name: "Git & GitHub", icon: "🐙", level: "Advanced" },
-          { name: "UI/UX Design", icon: "📐", level: "Advanced" },
-        ].map((skill) => (
-          <div key={skill.name} class="p-4 rounded-2xl border border-border/50 bg-card/30 backdrop-blur-sm flex flex-col justify-between hover:border-primary/30 hover:-translate-y-0.5 transition-all">
-            <div class="flex items-center gap-3">
-              <span class="text-2xl">{skill.icon}</span>
-              <div>
-                <div class="font-medium text-sm">{skill.name}</div>
-                <div class="text-[10px] text-muted-foreground">{skill.level}</div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    {/* Experience / Background */}
-    <section class="space-y-6">
-      <h2 class="text-3xl font-bold tracking-tight">What I Do</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="p-6 rounded-2xl border border-border/50 bg-card/30 backdrop-blur-sm space-y-3">
-          <h3 class="text-xl font-bold">Frontend Engineering</h3>
-          <p class="text-sm text-muted-foreground leading-relaxed">
-            I specialize in developing responsive, accessible, and fast web applications. I focus on core web vitals, bundle sizes, and leverage modern tools like Tailwind v4, Vite, and Astro to deliver seamless animations and experiences.
-          </p>
-        </div>
-        <div class="p-6 rounded-2xl border border-border/50 bg-card/30 backdrop-blur-sm space-y-3">
-          <h3 class="text-xl font-bold">Creative UI/UX Design</h3>
-          <p class="text-sm text-muted-foreground leading-relaxed">
-            I believe that great software must feel satisfying to use. I design clean layouts, subtle hover transitions, glassmorphic panels, and curated dark modes to ensure a premium feel across all interfaces.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    {/* Contact / Socials */}
-    <section class="p-8 rounded-3xl border border-border/50 bg-card/20 backdrop-blur-md text-center space-y-6 relative overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 -z-10"></div>
-      <h2 class="text-3xl font-bold tracking-tight">Let's Connect</h2>
-      <p class="text-muted-foreground max-w-lg mx-auto">
-        Whether you want to discuss a potential project, ask a question, or just say hello, my inbox is always open.
+<BaseLayout 
+  title="About | minpan.dev" 
+  description="Learn more about Min Pan, a frontend developer and designer."
+>
+  <div class="max-w-5xl mx-auto px-6 py-12 md:py-20">
+    
+    <header class="mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">
+        About <span class="text-indigo-400">Me</span>
+      </h1>
+      <p class="text-zinc-400 text-lg">
+        A glimpse into my world of design, code, and everything in between.
       </p>
-      <div class="flex justify-center gap-4 flex-wrap">
-        <a href="mailto:contact@minpan.dev" class="px-6 py-2.5 rounded-xl bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors shadow-md shadow-primary/20">
-          Email Me
-        </a>
-        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="px-6 py-2.5 rounded-xl border border-border/50 bg-secondary text-secondary-foreground font-medium hover:bg-secondary/80 transition-all flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-          GitHub
-        </a>
+    </header>
+
+    <!-- Bento Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 auto-rows-[auto]">
+      
+      <!-- Card 1: Intro (Spans 2 columns) -->
+      <div class="col-span-1 md:col-span-2 min-h-[320px] relative overflow-hidden rounded-[2rem] bg-zinc-900 border border-zinc-800/80 p-8 md:p-10 flex flex-col justify-end group transition-all duration-500 hover:border-zinc-700/80 shadow-2xl shadow-black/20">
+        <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-700 ease-in-out"></div>
+        <div class="absolute -right-32 -top-32 w-96 h-96 bg-indigo-500/20 blur-[120px] rounded-full group-hover:bg-indigo-500/30 transition-colors duration-700 pointer-events-none"></div>
+        
+        <div class="relative z-10 mt-12">
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight leading-[1.1]">
+            Hi, I'm Min Pan. <br/> 
+            <span class="text-zinc-500">I build modern web.</span>
+          </h2>
+          <p class="text-zinc-400 text-lg md:text-xl max-w-xl leading-relaxed font-light">
+            A passionate frontend developer and designer crafting beautiful, high-performance digital experiences with an obsessive attention to detail and premium aesthetics.
+          </p>
+        </div>
       </div>
-    </section>
+
+      <!-- Card 2: Tech Stack (Spans 1 column, 2 rows) -->
+      <div class="col-span-1 md:col-span-1 md:row-span-2 relative overflow-hidden rounded-[2rem] bg-zinc-900 border border-zinc-800/80 p-8 flex flex-col group transition-all duration-500 hover:border-zinc-700/80 shadow-2xl shadow-black/20">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 blur-[100px] rounded-full group-hover:bg-emerald-500/20 transition-colors duration-700 pointer-events-none"></div>
+        
+        <div class="relative z-10 flex-1">
+          <div class="flex items-center gap-3 mb-8">
+            <div class="p-2 rounded-xl bg-zinc-800/50 border border-zinc-700/50 text-emerald-400">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75 2.25 12l4.179 2.25m0-4.5 5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0 4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0-5.571 3-5.571-3" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white tracking-tight">Tech Arsenal</h3>
+          </div>
+          
+          <div class="flex flex-wrap gap-2.5">
+            {techStack.map(tech => (
+              <span class="px-3.5 py-1.5 bg-zinc-800/80 backdrop-blur-md text-zinc-300 rounded-full text-sm font-medium border border-zinc-700/50 hover:bg-zinc-700 hover:text-white transition-all hover:scale-105 cursor-default">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+        
+        <!-- Fade out effect at the bottom for visual depth -->
+        <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-zinc-900 via-zinc-900/80 to-transparent pointer-events-none"></div>
+      </div>
+
+      <!-- Card 3: Design Philosophy -->
+      <div class="col-span-1 relative overflow-hidden rounded-[2rem] bg-zinc-900 border border-zinc-800/80 p-8 flex flex-col justify-center group transition-all duration-500 hover:border-zinc-700/80 shadow-2xl shadow-black/20">
+        <div class="absolute inset-0 bg-gradient-to-tr from-rose-500/5 via-orange-500/5 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-700"></div>
+        
+        <div class="relative z-10">
+          <div class="p-2 rounded-xl bg-zinc-800/50 border border-zinc-700/50 text-rose-400 w-fit mb-5">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 22.5l-.813-6.596a2.25 2.25 0 0 0-1.904-1.904L1.5 13.187l6.596-.813a2.25 2.25 0 0 0 1.904-1.904L10.813 3l.813 6.596a2.25 2.25 0 0 0 1.904 1.904L20.125 12l-6.596.813a2.25 2.25 0 0 0-1.904 1.904ZM18 3l1.5 1.5L21 6l-1.5 1.5L18 9l-1.5-1.5L15 6l1.5-1.5L18 3Z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white tracking-tight mb-3">Aesthetic Meets Logic</h3>
+          <p class="text-zinc-400 text-[15px] leading-relaxed">
+            I believe the best products don't just work well, they feel right. I blend rigorous engineering with an obsessive focus on motion, typography, and layout.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 4: Social / Connect -->
+      <div class="col-span-1 relative overflow-hidden rounded-[2rem] bg-zinc-900 border border-zinc-800/80 p-8 flex flex-col justify-center group transition-all duration-500 hover:border-zinc-700/80 shadow-2xl shadow-black/20">
+        <div class="absolute inset-0 bg-gradient-to-bl from-blue-500/5 via-cyan-500/5 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-700"></div>
+        <div class="absolute -left-16 -bottom-16 w-48 h-48 bg-blue-500/10 blur-[80px] rounded-full pointer-events-none"></div>
+        
+        <div class="relative z-10 w-full flex flex-col gap-3">
+          <h3 class="text-sm font-medium text-zinc-500 uppercase tracking-wider mb-2">Connect</h3>
+          
+          <a href="https://github.com/minpan" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between px-4 py-3.5 bg-zinc-800/40 hover:bg-zinc-800/80 rounded-xl text-zinc-300 hover:text-white transition-all duration-300 border border-zinc-700/30 hover:border-zinc-600 group/link">
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path></svg>
+              <span class="font-medium text-sm">GitHub</span>
+            </div>
+            <svg class="w-4 h-4 text-zinc-500 group-hover/link:text-white group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" /></svg>
+          </a>
+          
+          <a href="mailto:hello@minpan.dev" class="flex items-center justify-between px-4 py-3.5 bg-zinc-800/40 hover:bg-zinc-800/80 rounded-xl text-zinc-300 hover:text-white transition-all duration-300 border border-zinc-700/30 hover:border-zinc-600 group/link">
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>
+              <span class="font-medium text-sm">Email</span>
+            </div>
+            <svg class="w-4 h-4 text-zinc-500 group-hover/link:text-white group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" /></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
   </div>
-</Layout>
+</BaseLayout>
