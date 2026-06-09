@@ -26,7 +26,7 @@ pnpm dlx shadcn@latest add <component-name>
 ## Git Conventions
 
 ### Git Hooks (husky)
-- **pre-commit**: Runs `lint-staged` — formats (Prettier) and lints (ESLint) staged `.ts/.tsx/.astro` files. Commit is blocked if checks fail.
+- **pre-commit**: Runs `lint-staged` — formats (Prettier) and lints (ESLint) staged `.ts/.tsx/.astro` files. Note: `.astro` files use `prettier --parser=astro`. Commit is blocked if checks fail.
 - **commit-msg**: Runs `commitlint` with `@commitlint/config-conventional`. Enforces [Conventional Commits](https://www.conventionalcommits.org/) format.
 
 ### Commit Message Format
@@ -50,11 +50,11 @@ Examples:
 - React interactive components use Astro's `client:load` (or other client directives) when rendered in `.astro` pages.
 
 ### Styling
-- **`src/styles/global.css`** — Tailwind CSS v4 entry point. Imports `shadcn/tailwind.css` and `tw-animate-css`. CSS variables (oklch) for theming with `.dark` class support.
+- **`src/styles/global.css`** — Tailwind CSS v4 entry point. Imports `tailwindcss`, `tw-animate-css`, `shadcn/tailwind.css`, and `@fontsource-variable/geist`. CSS variables (oklch) for theming with `.dark` class support.
 - Path alias `@/` maps to `./src/*` (configured in `tsconfig.json`).
 
 ### Utilities
-- **`src/lib/utils.ts`** — `cn()` helper combing `clsx` and `tailwind-merge` for conditional class merging.
+- **`src/lib/utils.ts`** — `cn()` helper combining `clsx` and `tailwind-merge` for conditional class merging. Also use `cva` from `class-variance-authority` for component variants.
 - Font: Geist Variable (`@fontsource-variable/geist`) as sans-serif default.
 - Icon library: Lucide React.
 
@@ -63,7 +63,7 @@ Examples:
 |------|---------|
 | `astro.config.mjs` | Astro config: React integration, Tailwind Vite plugin |
 | `tsconfig.json` | TypeScript strict, path alias `@/*` |
-| `eslint.config.js` | ESLint flat config: recommended JS/TS + React Hooks |
+| `eslint.config.js` | ESLint flat config: recommended JS/TS + React Hooks + React Refresh |
 | `.prettierrc` | Prettier with Astro + Tailwind CSS plugins |
 | `components.json` | shadcn/ui configuration (component registry, aliases) |
 | `.mcp.json` | MCP server configs: shadcn (component tools), astro-docs (documentation) |
