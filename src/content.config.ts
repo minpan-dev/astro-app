@@ -1,5 +1,5 @@
-import { z, defineCollection } from "astro:content";
-import { glob } from "astro/loaders";
+import { z, defineCollection } from "astro:content"
+import { glob } from "astro/loaders"
 
 const blogCollection = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/blog" }),
@@ -11,7 +11,7 @@ const blogCollection = defineCollection({
     image: z.string().optional(),
     featured: z.boolean().optional(),
   }),
-});
+})
 
 const projectsCollection = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/projects" }),
@@ -25,9 +25,9 @@ const projectsCollection = defineCollection({
     liveUrl: z.string().optional(),
     featured: z.boolean().optional(),
   }),
-});
+})
 
 export const collections = {
   blog: blogCollection,
   projects: projectsCollection,
-};
+}
