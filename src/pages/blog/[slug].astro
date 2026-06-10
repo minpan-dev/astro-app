@@ -2,52 +2,167 @@
 import { getCollection, render } from "astro:content"
 import Layout from "../../layouts/main.astro"
 import { Badge } from "../../components/ui/badge"
+import { Button } from "../../components/ui/button"
+import SiteBreadcrumb from "../../components/SiteBreadcrumb.astro"
+import { Calendar, Clock, ChevronLeft, ChevronRight } from "lucide-react"
+import { SiX, SiSinaweibo } from "react-icons/si"
+import { FaQq } from "react-icons/fa"
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog")
-  return blogEntries.map((entry) => ({
-    params: { slug: entry.id },
-    props: { entry },
-  }))
+  blogEntries.sort(
+    (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+  )
+
+  return blogEntries.map((entry, index) => {
+    const prevEntry =
+      index + 1 < blogEntries.length ? blogEntries[index + 1] : null
+    const nextEntry = index - 1 >= 0 ? blogEntries[index - 1] : null
+
+    return {
+      params: { slug: entry.id },
+      props: { entry, prevEntry, nextEntry },
+    }
+  })
 }
 
-const { entry } = Astro.props
+const { entry, prevEntry, nextEntry } = Astro.props
 const { Content } = await render(entry)
+
+const wordCount = (entry.body || "").split(/\s+/).length
+const readingTime = Math.max(1, Math.ceil(wordCount / 200))
 ---
 
 <Layout>
   <article class="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+    <SiteBreadcrumb className="mb-8" customTitle={entry.data.title} />
     <header class="mb-12 text-center">
-      {
-        entry.data.tags && entry.data.tags.length > 0 && (
-          <div class="mb-6 flex justify-center gap-2">
-            {entry.data.tags.map((tag) => (
-              <Badge variant="secondary">{tag}</Badge>
-            ))}
-          </div>
-        )
-      }
       <h1 class="mb-6 text-4xl font-extrabold tracking-tight md:text-5xl">
         {entry.data.title}
       </h1>
-      <time
-        class="text-muted-foreground"
-        datetime={entry.data.publishDate.toISOString()}
+      <div
+        class="flex items-center justify-center gap-4 text-sm text-muted-foreground"
       >
-        {
-          entry.data.publishDate.toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })
-        }
-      </time>
+        <div class="flex items-center gap-1.5">
+          <Calendar className="size-4" />
+          <time datetime={entry.data.publishDate.toISOString()}>
+            {
+              entry.data.publishDate.toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            }
+          </time>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <Clock className="size-4" />
+          <span>{readingTime} min read</span>
+        </div>
+      </div>
     </header>
 
     <div
-      class="prose prose-lg max-w-none dark:prose-invert prose-headings:font-bold prose-a:text-primary hover:prose-a:text-primary/80"
+      class="prose prose-lg mb-12 max-w-none dark:prose-invert prose-headings:font-bold prose-a:text-primary hover:prose-a:text-primary/80"
     >
       <Content />
     </div>
+
+    <div
+      class="mt-8 flex flex-col justify-between gap-6 border-t border-border/50 pt-8 sm:flex-row sm:items-center"
+    >
+      <div class="flex-1">
+        {
+          entry.data.tags && entry.data.tags.length > 0 && (
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="mr-2 text-sm font-medium text-muted-foreground">
+                Tags:
+              </span>
+              {entry.data.tags.map((tag) => (
+                <Badge variant="secondary">{tag}</Badge>
+              ))}
+            </div>
+          )
+        }
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="mr-2 text-sm font-medium text-muted-foreground"
+          >Share:</span
+        >
+        <Button variant="outline" size="icon" className="rounded-full" asChild>
+          <a
+            href={`https://twitter.com/intent/tweet?url=https://minpan.dev/blog/${entry.id}&text=${encodeURIComponent(entry.data.title)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Share on X (Twitter)"
+          >
+            <SiX className="size-4" />
+          </a>
+        </Button>
+        <Button variant="outline" size="icon" className="rounded-full" asChild>
+          <a
+            href={`http://service.weibo.com/share/share.php?url=https://minpan.dev/blog/${entry.id}&title=${encodeURIComponent(entry.data.title)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Share on Weibo"
+          >
+            <SiSinaweibo className="size-4" />
+          </a>
+        </Button>
+        <Button variant="outline" size="icon" className="rounded-full" asChild>
+          <a
+            href={`http://connect.qq.com/widget/shareqq/index.html?url=https://minpan.dev/blog/${entry.id}&title=${encodeURIComponent(entry.data.title)}&summary=${encodeURIComponent(entry.data.description || entry.data.title)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Share on QQ"
+          >
+            <FaQq className="size-4" />
+          </a>
+        </Button>
+      </div>
+    </div>
+
+    {
+      (prevEntry || nextEntry) && (
+        <nav
+          class="mt-12 flex flex-col items-center justify-between gap-6 border-t border-border/50 pt-8 sm:flex-row"
+          aria-label="Pagination"
+        >
+          {prevEntry ? (
+            <a
+              href={`/blog/${prevEntry.id}`}
+              class="group flex w-full flex-col gap-2 rounded-lg border border-border/50 p-4 text-left transition-colors hover:bg-muted/50 sm:w-1/2 sm:border-transparent"
+            >
+              <span class="flex items-center gap-1 text-sm text-muted-foreground">
+                <ChevronLeft className="size-4" />
+                Previous Post
+              </span>
+              <span class="line-clamp-2 text-lg font-medium transition-colors group-hover:text-primary">
+                {prevEntry.data.title}
+              </span>
+            </a>
+          ) : (
+            <div class="hidden sm:block sm:w-1/2" />
+          )}
+
+          {nextEntry ? (
+            <a
+              href={`/blog/${nextEntry.id}`}
+              class="group flex w-full flex-col items-start gap-2 rounded-lg border border-border/50 p-4 text-left transition-colors hover:bg-muted/50 sm:w-1/2 sm:items-end sm:border-transparent sm:text-right"
+            >
+              <span class="flex items-center gap-1 text-sm text-muted-foreground">
+                Next Post
+                <ChevronRight className="size-4" />
+              </span>
+              <span class="line-clamp-2 text-left text-lg font-medium transition-colors group-hover:text-primary sm:text-right">
+                {nextEntry.data.title}
+              </span>
+            </a>
+          ) : (
+            <div class="hidden sm:block sm:w-1/2" />
+          )}
+        </nav>
+      )
+    }
   </article>
 </Layout>
