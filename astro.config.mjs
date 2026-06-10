@@ -10,6 +10,8 @@ import {
   transformerNotationHighlight,
   transformerNotationWordHighlight,
 } from "@shikijs/transformers"
+import { transformerFileName } from "./src/utils/transformerFileName.js";
+import { transformerCopyCode } from "./src/utils/transformerCopyCode.js";
 
 // https://astro.build/config
 export default defineConfig({
@@ -23,6 +25,8 @@ export default defineConfig({
       defaultColor: false,
       wrap: true,
       transformers: [
+        transformerFileName(),
+        transformerCopyCode(),
         transformerNotationHighlight(),
         transformerNotationWordHighlight(),
         transformerNotationDiff({ matchAlgorithm: "v3" }),
