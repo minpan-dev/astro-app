@@ -6,6 +6,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 An Astro v6 + React 19 application with Tailwind CSS v4, shadcn/ui (Radix UI Nova style), and TypeScript 6. Uses pnpm as the package manager. Requires Node >= 22.12.0.
 
+## Quick Start
+
+```bash
+pnpm install           # Install dependencies (Node >= 22.12.0 required)
+```
+
 ## Commands
 
 ```bash
@@ -49,6 +55,12 @@ Examples:
 - **`src/components/ui/`** — shadcn/ui React components (Radix UI primitives). Imported as `@/components/ui/<name>`.
 - React interactive components use Astro's `client:load` (or other client directives) when rendered in `.astro` pages.
 
+### Content (Astro Content Collections)
+- **`src/content/blog/`** — Blog posts as Markdown with frontmatter (`title`, `publishDate`, `tags`).
+- **`src/content/projects/`** — Project pages as Markdown with frontmatter.
+- Content fetched via `getCollection()` and rendered via `render()` from `astro:content`.
+- Dynamic routes (`[slug].astro`) use `getStaticPaths()` to map content entries to pages.
+
 ### Styling
 - **`src/styles/global.css`** — Tailwind CSS v4 entry point. Imports `tailwindcss`, `tw-animate-css`, `shadcn/tailwind.css`, and `@fontsource-variable/geist`. CSS variables (oklch) for theming with `.dark` class support.
 - Path alias `@/` maps to `./src/*` (configured in `tsconfig.json`).
@@ -56,7 +68,7 @@ Examples:
 ### Utilities
 - **`src/lib/utils.ts`** — `cn()` helper combining `clsx` and `tailwind-merge` for conditional class merging. Also use `cva` from `class-variance-authority` for component variants.
 - Font: Geist Variable (`@fontsource-variable/geist`) as sans-serif default.
-- Icon library: Lucide React.
+- Icon libraries: **Lucide React** (general icons) and **react-icons/si** (brand icons like GitHub, X).
 
 ### Key Config Files
 | File | Purpose |
@@ -69,6 +81,13 @@ Examples:
 | `.mcp.json` | MCP server configs: shadcn (component tools), astro-docs (documentation) |
 
 ### Adding New Pages
-1. Create a `.astro` file in `src/pages/`
-2. Use `src/layouts/main.astro` as the layout wrapper
-3. Import React components with `client:*` directives for interactivity
+1. Create a `.astro` file in `src/pages/` (or `.md` in `src/content/<collection>/` for content-driven pages)
+2. Use `src/layouts/main.astro` as the layout wrapper (`import Layout from "../../layouts/main.astro"`)
+3. For content-driven pages: use `getStaticPaths()` + `getCollection()` to map content to routes, then `render()` to render Markdown
+4. Import interactive React components with `client:*` directives
+
+### Gotchas
+- **Dark mode FOUC prevention**: `main.astro` uses inline `<script is:inline>` to apply `.dark` class before first paint. Theme preference persists in `localStorage`.
+- **`.astro` lint-staged**: Treated specially — Prettier uses `--parser=astro`, and both Prettier + ESLint run. This differs from `.tsx` files.
+- **`shadcn/tailwind.css`**: Imported in `global.css`; resolves via node_modules (no path alias required).
+- **`@tailwindcss/typography`**: The `prose` classes in blog/project content come from this plugin. Configured per instance (e.g., `prose prose-lg dark:prose-invert prose-a:text-primary`).
