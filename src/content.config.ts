@@ -23,8 +23,9 @@ const projectsCollection = defineCollection({
     tags: z.array(z.string()).optional(),
     image: z.string().optional(),
     githubUrl: z.string().optional(),
-    liveUrl: z.string().optional(),
     featured: z.boolean().optional(),
+    status: z.string().optional(),
+    license: z.string().optional(),
   }),
 })
 

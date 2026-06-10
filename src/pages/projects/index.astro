@@ -28,11 +28,10 @@ const sortedProjects = allProjects.sort(
             title={project.data.title}
             description={project.data.description}
             date={project.data.publishDate}
-            slug={project.id}
             tags={project.data.tags}
             image={project.data.image}
             githubUrl={project.data.githubUrl}
-            liveUrl={project.data.liveUrl}
+            license={project.data.license}
           />
         ))
       }
