@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Moon, Sun } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -11,7 +11,7 @@ import {
 
 type Theme = "light" | "dark" | "system"
 
-export function ThemeToggle() {
+export const ThemeToggle: React.FC = () => {
   const [theme, setThemeState] = useState<Theme>(() => {
     if (typeof localStorage !== "undefined") {
       const stored = localStorage.getItem("theme") as Theme | null

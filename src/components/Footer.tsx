@@ -1,8 +1,9 @@
 import { SiGithub, SiX } from "react-icons/si"
 import { Button } from "@/components/ui/button"
+import React from "react"
 import { Separator } from "@/components/ui/separator"
 
-export default function Footer() {
+const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear()
 
   return (
@@ -49,3 +50,5 @@ export default function Footer() {
     </footer>
   )
 }
+
+export default Footer

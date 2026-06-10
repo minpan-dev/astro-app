@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/sheet"
 import { ThemeToggle } from "./ThemeToggle"
 
-export default function Navbar() {
+const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
@@ -88,3 +88,5 @@ export default function Navbar() {
     </header>
   )
 }
+
+export default Navbar

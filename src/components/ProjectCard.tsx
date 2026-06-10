@@ -8,6 +8,7 @@ import {
   CardFooter,
 } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import React from "react"
 import { Button } from "@/components/ui/button"
 
 export interface ProjectCardProps {
@@ -21,7 +22,7 @@ export interface ProjectCardProps {
   liveUrl?: string
 }
 
-export default function ProjectCard({
+const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
   description,
   date,
@@ -30,7 +31,7 @@ export default function ProjectCard({
   image,
   githubUrl,
   liveUrl,
-}: ProjectCardProps) {
+}: ProjectCardProps) => {
   return (
     <Card className="group relative flex h-full flex-col overflow-hidden bg-card/40 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl">
       {/* Subtle hover gradient */}
@@ -124,3 +125,5 @@ export default function ProjectCard({
     </Card>
   )
 }
+
+export default ProjectCard

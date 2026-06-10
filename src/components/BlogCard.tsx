@@ -5,6 +5,7 @@ import {
   CardDescription,
   CardFooter,
 } from "@/components/ui/card"
+import React from "react"
 import { Badge } from "@/components/ui/badge"
 
 export interface BlogCardProps {
@@ -15,13 +16,13 @@ export interface BlogCardProps {
   tags?: string[]
 }
 
-export default function BlogCard({
+const BlogCard: React.FC<BlogCardProps> = ({
   title,
   description,
   date,
   slug,
   tags,
-}: BlogCardProps) {
+}: BlogCardProps) => {
   return (
     <a href={`/blog/${slug}`} className="group block h-full">
       <Card className="relative flex h-full flex-col overflow-hidden bg-card/50 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg">
@@ -60,3 +61,5 @@ export default function BlogCard({
     </a>
   )
 }
+
+export default BlogCard
