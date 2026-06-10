@@ -5,7 +5,6 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-  CardFooter,
 } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import React from "react"
@@ -107,21 +106,21 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <CardDescription className="mt-2 line-clamp-3 text-sm">
           {description}
         </CardDescription>
-      </CardHeader>
 
-      {tags && tags.length > 0 && (
-        <CardFooter className="relative z-10 mt-auto flex flex-wrap gap-2 pt-0">
-          {tags.map((tag) => (
-            <Badge
-              key={tag}
-              variant="secondary"
-              className="rounded-md bg-secondary/70 font-medium backdrop-blur-sm"
-            >
-              {tag}
-            </Badge>
-          ))}
-        </CardFooter>
-      )}
+        {tags && tags.length > 0 && (
+          <div className="mt-4 flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <Badge
+                key={tag}
+                variant="secondary"
+                className="rounded-md bg-secondary/70 font-medium backdrop-blur-sm"
+              >
+                {tag}
+              </Badge>
+            ))}
+          </div>
+        )}
+      </CardHeader>
     </Card>
   )
 }
