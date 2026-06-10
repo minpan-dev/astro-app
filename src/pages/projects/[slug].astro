@@ -4,7 +4,7 @@ import Layout from "../../layouts/main.astro"
 import { Badge } from "../../components/ui/badge"
 import { Button } from "../../components/ui/button"
 import { Separator } from "../../components/ui/separator"
-import { FaGithub } from "react-icons/fa6"
+import { SiGithub } from "react-icons/si"
 import { ArrowLeft, ExternalLink } from "lucide-react"
 
 export async function getStaticPaths() {
@@ -78,7 +78,7 @@ const { Content } = await render(entry)
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaGithub className="size-4" />
+                <SiGithub className="size-4" />
                 Code
               </a>
             </Button>

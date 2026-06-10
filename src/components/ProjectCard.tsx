@@ -1,4 +1,4 @@
-import { FaGithub } from "react-icons/fa6"
+import { SiGithub } from "react-icons/si"
 import { ExternalLink } from "lucide-react"
 import {
   Card,
@@ -75,7 +75,7 @@ export default function ProjectCard({
                   rel="noopener noreferrer"
                   title="View Source Code"
                 >
-                  <FaGithub />
+                  <SiGithub />
                 </a>
               </Button>
             )}

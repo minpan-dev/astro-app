@@ -1,4 +1,4 @@
-import { FaGithub, FaXTwitter } from "react-icons/fa6"
+import { SiGithub, SiX } from "react-icons/si"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 
@@ -24,7 +24,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaXTwitter className="size-5" />
+                <SiX className="size-5" />
               </a>
             </Button>
             <Button variant="ghost" size="icon" asChild>
@@ -34,7 +34,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaGithub className="size-5" />
+                <SiGithub className="size-5" />
               </a>
             </Button>
           </div>
