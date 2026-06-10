@@ -4,6 +4,7 @@ import Layout from "../../layouts/main.astro"
 import { Badge } from "../../components/ui/badge"
 import { Button } from "../../components/ui/button"
 import SiteBreadcrumb from "../../components/SiteBreadcrumb.astro"
+import BackToTop from "../../components/BackToTop"
 import { Calendar, Clock, ChevronLeft, ChevronRight } from "lucide-react"
 import { SiX, SiSinaweibo } from "react-icons/si"
 import { FaQq } from "react-icons/fa"
@@ -164,5 +165,6 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200))
         </nav>
       )
     }
+    <BackToTop client:idle />
   </article>
 </Layout>
