@@ -25,6 +25,7 @@ const projectsCollection = defineCollection({
     githubUrl: z.string().optional(),
     featured: z.boolean().optional(),
     status: z.string().optional(),
+    language: z.string().optional(),
     license: z.string().optional(),
   }),
 })

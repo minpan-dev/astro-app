@@ -7,5 +7,6 @@ tags: ["Cloudflare", "Edge Computing", "Proxy", "Workers"]
 githubUrl: "https://github.com/minpan-dev/edgetunnel"
 featured: true
 status: "活跃"
-license: "GPL-3.0"
+license: "GPL-2.0"
+language: "JavaScript"
 ---

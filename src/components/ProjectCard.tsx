@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react"
-import { Star, GitFork, CircleDot, Scale } from "lucide-react"
+import React from "react"
+import { Scale, Activity } from "lucide-react"
 import {
   Card,
   CardHeader,
@@ -7,6 +7,29 @@ import {
   CardDescription,
 } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+
+const languageColors: Record<string, string> = {
+  TypeScript: "#3178c6",
+  JavaScript: "#f1e05a",
+  Golang: "#00ADD8",
+  Go: "#00ADD8",
+  Python: "#3572A5",
+  Rust: "#dea584",
+  Java: "#b07219",
+  "C++": "#f34b7d",
+  C: "#555555",
+  "C#": "#178600",
+  PHP: "#4F5D95",
+  Ruby: "#701516",
+  Swift: "#F05138",
+  Kotlin: "#A97BFF",
+  Dart: "#00B4AB",
+  HTML: "#e34c26",
+  CSS: "#563d7c",
+  Vue: "#41b883",
+  Svelte: "#ff3e00",
+  Astro: "#ff5a03",
+}
 
 export interface ProjectCardProps {
   title: string
@@ -16,6 +39,8 @@ export interface ProjectCardProps {
   image?: string
   githubUrl?: string
   license?: string
+  status?: string
+  language?: string
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -26,76 +51,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   image,
   githubUrl,
   license,
+  status,
+  language,
 }: ProjectCardProps) => {
-  const [repoData, setRepoData] = useState<{
-    stars: number
-    forks: number
-    issues: number
-    language: string
-  } | null>(() => {
-    if (
-      typeof sessionStorage !== "undefined" &&
-      githubUrl &&
-      githubUrl.includes("github.com/")
-    ) {
-      const urlParts = githubUrl.split("github.com/")[1].split("/")
-      if (urlParts[0] && urlParts[1]) {
-        const cacheKey = `gh_repo_${urlParts[0]}_${urlParts[1]}`
-        const cached = sessionStorage.getItem(cacheKey)
-        if (cached) {
-          try {
-            return JSON.parse(cached)
-          } catch {
-            // ignore parse error
-          }
-        }
-      }
-    }
-    return null
-  })
-
-  useEffect(() => {
-    if (repoData) return // already cached
-    if (!githubUrl || !githubUrl.includes("github.com/")) return
-
-    const urlParts = githubUrl.split("github.com/")[1].split("/")
-    const owner = urlParts[0]
-    const repo = urlParts[1]
-
-    if (!owner || !repo) return
-
-    const cacheKey = `gh_repo_${owner}_${repo}`
-
-    fetch(`https://api.github.com/repos/${owner}/${repo}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.stargazers_count !== undefined) {
-          const newData = {
-            stars: data.stargazers_count,
-            forks: data.forks_count,
-            issues: data.open_issues_count,
-            language: data.language,
-          }
-          setRepoData(newData)
-          sessionStorage.setItem(cacheKey, JSON.stringify(newData))
-        } else if (data.message && data.message.includes("rate limit")) {
-          // Fallback for local development when rate limit is hit
-          if (import.meta.env.DEV) {
-            setRepoData({
-              stars: Math.floor(Math.random() * 500) + 50,
-              forks: Math.floor(Math.random() * 100),
-              issues: Math.floor(Math.random() * 20),
-              language: "TypeScript",
-            })
-            console.warn(
-              `[DEV] GitHub API Rate Limited for ${owner}/${repo}. Displaying mock data.`
-            )
-          }
-        }
-      })
-      .catch(console.error)
-  }, [githubUrl])
-
   return (
     <Card className="group relative flex h-full flex-col overflow-hidden bg-card/40 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl">
       {image && (
@@ -154,8 +112,31 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </div>
         )}
 
-        {(repoData || license) && (
+        {(status || language || license) && (
           <div className="mt-6 flex flex-wrap items-center gap-4 border-t border-border/50 pt-4 text-xs font-medium text-muted-foreground">
+            {status && (
+              <div
+                className="flex items-center gap-1.5 text-foreground"
+                title="项目状态"
+              >
+                <Activity className="h-3.5 w-3.5" />
+                <span>{status}</span>
+              </div>
+            )}
+            {language && (
+              <div
+                className="flex items-center gap-1.5 text-foreground"
+                title="主要语言"
+              >
+                <span
+                  className="h-2.5 w-2.5 rounded-full"
+                  style={{
+                    backgroundColor: languageColors[language] || "currentColor",
+                  }}
+                />
+                <span>{language}</span>
+              </div>
+            )}
             {license && (
               <div
                 className="flex items-center gap-1 text-foreground"
@@ -164,31 +145,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                 <Scale className="h-3.5 w-3.5" />
                 <span>{license}</span>
               </div>
-            )}
-            {repoData?.language && (
-              <div className="flex items-center gap-1.5" title="主要语言">
-                <span className="h-2.5 w-2.5 rounded-full bg-primary/70" />
-                {repoData.language}
-              </div>
-            )}
-            {repoData && (
-              <>
-                <div className="flex items-center gap-1" title="Stars">
-                  <Star className="h-3.5 w-3.5" />
-                  <span>{repoData.stars}</span>
-                </div>
-                <div className="flex items-center gap-1" title="Forks">
-                  <GitFork className="h-3.5 w-3.5" />
-                  <span>{repoData.forks}</span>
-                </div>
-                <div
-                  className="flex items-center gap-1 text-green-600 dark:text-green-400"
-                  title="未关闭 Issues"
-                >
-                  <CircleDot className="h-3.5 w-3.5" />
-                  <span>{repoData.issues}</span>
-                </div>
-              </>
             )}
           </div>
         )}

@@ -8,4 +8,5 @@ githubUrl: "https://github.com/minpan-dev/peer-link-web"
 featured: true
 status: "寻找贡献者"
 license: "MIT"
+language: "TypeScript"
 ---

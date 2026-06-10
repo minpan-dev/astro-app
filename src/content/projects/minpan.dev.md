@@ -8,4 +8,5 @@ githubUrl: "https://github.com/minpan-dev/minpan.dev"
 featured: true
 status: "活跃"
 license: "MIT"
+language: "TypeScript"
 ---
