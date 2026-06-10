@@ -1,53 +1,90 @@
-import { useState, useEffect } from "react";
-import { ThemeToggle } from "./ThemeToggle";
+import { useState, useEffect } from "react"
+import { Menu } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetTitle,
+} from "@/components/ui/sheet"
+import { ThemeToggle } from "./ThemeToggle"
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(false)
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+      setScrolled(window.scrollY > 20)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  const navLinks = [
+    { href: "/blog", label: "Blog" },
+    { href: "/projects", label: "Projects" },
+  ]
 
   return (
     <header
-      className={`fixed top-0 w-full z-50 transition-all duration-300 border-b ${
+      className={`fixed top-0 z-50 w-full border-b transition-all duration-300 ${
         scrolled
-          ? "bg-background border-border/50 shadow-sm"
-          : "bg-transparent border-transparent"
+          ? "border-border/50 bg-background/95 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-background/80"
+          : "border-transparent bg-transparent"
       }`}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between">
           <div className="flex-shrink-0">
-            <a href="/" className="text-2xl font-bold text-foreground">
+            <a
+              href="/"
+              className="text-2xl font-bold text-foreground transition-colors hover:text-foreground/80"
+            >
               minpan.dev
             </a>
           </div>
-          <div className="flex items-center gap-4">
-            <nav className="hidden md:block mr-4">
-              <ul className="flex space-x-8">
 
-                <li>
-                  <a href="/blog" className="text-muted-foreground hover:text-foreground transition-colors duration-200">
-                    Blog
-                  </a>
-                </li>
-                <li>
-                  <a href="/projects" className="text-muted-foreground hover:text-foreground transition-colors duration-200">
-                    Projects
-                  </a>
-                </li>
-
-              </ul>
-            </nav>
+          {/* Desktop nav */}
+          <div className="hidden items-center gap-1 md:flex">
+            {navLinks.map((link) => (
+              <Button key={link.href} variant="ghost" asChild>
+                <a href={link.href}>{link.label}</a>
+              </Button>
+            ))}
             <ThemeToggle />
+          </div>
+
+          {/* Mobile nav trigger */}
+          <div className="flex items-center gap-1 md:hidden">
+            <ThemeToggle />
+            <Sheet open={open} onOpenChange={setOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" aria-label="Open menu">
+                  <Menu />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[280px] pt-12">
+                <SheetTitle className="sr-only">Navigation menu</SheetTitle>
+                <nav className="flex flex-col gap-2">
+                  {navLinks.map((link) => (
+                    <Button
+                      key={link.href}
+                      variant="ghost"
+                      className="justify-start text-lg"
+                      asChild
+                    >
+                      <a href={link.href} onClick={() => setOpen(false)}>
+                        {link.label}
+                      </a>
+                    </Button>
+                  ))}
+                </nav>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </div>
     </header>
-  );
+  )
 }
