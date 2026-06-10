@@ -13,7 +13,7 @@ const postsByYearAndMonth = sortedPosts.reduce(
   (acc, post) => {
     const date = post.data.publishDate
     const year = date.getFullYear()
-    const month = date.toLocaleString("en-US", { month: "long" })
+    const month = date.toLocaleString("zh-CN", { month: "long" })
 
     if (!acc[year]) {
       acc[year] = { count: 0, months: {} }
@@ -45,9 +45,9 @@ const years = Object.keys(postsByYearAndMonth)
 <Layout>
   <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
     <div class="mb-12">
-      <h1 class="mb-4 text-4xl font-bold tracking-tight md:text-5xl">Blog</h1>
+      <h1 class="mb-4 text-4xl font-bold tracking-tight md:text-5xl">博客</h1>
       <p class="text-xl text-muted-foreground">
-        Thoughts, tutorials, and insights on design and engineering.
+        关于设计与工程的思考、教程和见解。
       </p>
     </div>
 

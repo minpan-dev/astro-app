@@ -40,7 +40,7 @@ export default function BackToTop() {
         size="icon"
         className="h-12 w-12 rounded-full border-border bg-background/80 shadow-lg backdrop-blur-sm transition-transform hover:-translate-y-1 hover:bg-accent hover:text-accent-foreground"
         onClick={scrollToTop}
-        aria-label="Back to top"
+        aria-label="回到顶部"
       >
         <ArrowUp className="size-6" />
       </Button>

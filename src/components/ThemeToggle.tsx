@@ -54,7 +54,7 @@ export const ThemeToggle: React.FC = () => {
         <Button
           variant="ghost"
           size="icon"
-          aria-label="Change theme"
+          aria-label="切换主题"
           className="aria-expanded:bg-transparent aria-expanded:text-muted-foreground"
         >
           <Sun className="dark:hidden" />
@@ -69,9 +69,9 @@ export const ThemeToggle: React.FC = () => {
           value={theme}
           onValueChange={(v) => setTheme(v as Theme)}
         >
-          <DropdownMenuRadioItem value="light">Light</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="dark">Dark</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="system">System</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="light">浅色</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="dark">深色</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="system">系统</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>

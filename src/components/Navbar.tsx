@@ -22,8 +22,8 @@ const Navbar: React.FC = () => {
   }, [])
 
   const navLinks = [
-    { href: "/blog", label: "Blog" },
-    { href: "/projects", label: "Projects" },
+    { href: "/blog", label: "博客" },
+    { href: "/projects", label: "项目" },
   ]
 
   return (
@@ -60,12 +60,12 @@ const Navbar: React.FC = () => {
             <ThemeToggle />
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" aria-label="Open menu">
+                <Button variant="ghost" size="icon" aria-label="打开菜单">
                   <Menu />
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[280px] pt-12">
-                <SheetTitle className="sr-only">Navigation menu</SheetTitle>
+                <SheetTitle className="sr-only">导航菜单</SheetTitle>
                 <nav className="flex flex-col gap-2">
                   {navLinks.map((link) => (
                     <Button

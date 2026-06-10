@@ -11,5 +11,5 @@ export function getReadingTime(content: string): string {
   const cleanContent = content.replace(/[#*`_]/g, "")
   const words = cleanContent.trim().split(/\s+/).length
   const minutes = Math.ceil(words / wordsPerMinute)
-  return `${minutes} min read`
+  return `${minutes} 分钟阅读`
 }

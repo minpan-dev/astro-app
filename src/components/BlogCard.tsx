@@ -29,7 +29,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
         <div className="mb-3 flex items-center gap-1.5 text-sm text-muted-foreground">
           <CalendarDays className="h-4 w-4" />
           <time dateTime={date.toISOString()}>
-            {date.toLocaleDateString("en-US", {
+            {date.toLocaleDateString("zh-CN", {
               year: "numeric",
               month: "short",
               day: "numeric",

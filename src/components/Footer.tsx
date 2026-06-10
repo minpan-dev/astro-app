@@ -43,7 +43,7 @@ const Footer: React.FC = () => {
           <Separator className="w-full max-w-xs" />
 
           <p className="text-sm text-muted-foreground">
-            &copy; {currentYear} minpan.dev. All rights reserved.
+            &copy; {currentYear} minpan.dev. 保留所有权利。
           </p>
         </div>
       </div>

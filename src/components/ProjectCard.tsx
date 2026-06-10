@@ -120,7 +120,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             className="text-xs text-muted-foreground"
             dateTime={date.toISOString()}
           >
-            {date.toLocaleDateString("en-US", {
+            {date.toLocaleDateString("zh-CN", {
               year: "numeric",
               month: "long",
             })}
@@ -159,17 +159,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             {license && (
               <div
                 className="flex items-center gap-1 text-foreground"
-                title="License"
+                title="开源协议"
               >
                 <Scale className="h-3.5 w-3.5" />
                 <span>{license}</span>
               </div>
             )}
             {repoData?.language && (
-              <div
-                className="flex items-center gap-1.5"
-                title="Primary Language"
-              >
+              <div className="flex items-center gap-1.5" title="主要语言">
                 <span className="h-2.5 w-2.5 rounded-full bg-primary/70" />
                 {repoData.language}
               </div>
@@ -186,7 +183,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                 </div>
                 <div
                   className="flex items-center gap-1 text-green-600 dark:text-green-400"
-                  title="Open Issues"
+                  title="未关闭 Issues"
                 >
                   <CircleDot className="h-3.5 w-3.5" />
                   <span>{repoData.issues}</span>

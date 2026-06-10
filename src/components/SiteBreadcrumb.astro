@@ -27,14 +27,20 @@ if (propItems) {
   const pathname = Astro.url.pathname
   const segments = pathname.split("/").filter(Boolean)
 
-  items = [{ label: "Home", href: "/" }]
+  items = [{ label: "首页", href: "/" }]
 
   let currentPath = ""
   segments.forEach((segment, index) => {
     currentPath += `/${segment}`
     const isLast = index === segments.length - 1
 
+    const routeNames: Record<string, string> = {
+      blog: "博客",
+      projects: "项目",
+    }
+
     let label =
+      routeNames[segment] ||
       segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, " ")
 
     // Override the last segment's label with the custom title if provided

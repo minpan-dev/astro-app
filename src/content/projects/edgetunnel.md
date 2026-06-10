@@ -6,6 +6,6 @@ image: "https://opengraph.githubassets.com/1/minpan-dev/edgetunnel"
 tags: ["Cloudflare", "Edge Computing", "Proxy", "Workers"]
 githubUrl: "https://github.com/minpan-dev/edgetunnel"
 featured: true
-status: "Active"
+status: "活跃"
 license: "GPL-3.0"
 ---
