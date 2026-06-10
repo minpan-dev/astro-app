@@ -126,6 +126,9 @@
     @apply bg-background text-foreground;
     }
   html {
-    @apply font-sans;
+    @apply font-sans scroll-smooth;
+    }
+  [id] {
+    @apply scroll-mt-24;
     }
 }

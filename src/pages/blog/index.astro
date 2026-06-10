@@ -13,7 +13,7 @@ const postsByYearAndMonth = sortedPosts.reduce(
   (acc, post) => {
     const date = post.data.publishDate
     const year = date.getFullYear()
-    const month = date.toLocaleString("zh-CN", { month: "long" })
+    const month = date.getMonth() + 1 + " 月"
 
     if (!acc[year]) {
       acc[year] = { count: 0, months: {} }
@@ -43,7 +43,7 @@ const years = Object.keys(postsByYearAndMonth)
 ---
 
 <Layout>
-  <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
     <div class="mb-12">
       <h1 class="mb-4 text-4xl font-bold tracking-tight md:text-5xl">博客</h1>
       <p class="text-xl text-muted-foreground">
@@ -55,19 +55,19 @@ const years = Object.keys(postsByYearAndMonth)
       {
         years.map((year) => (
           <section>
-            <h2 class="mb-8 flex items-start gap-1 text-2xl font-bold tracking-tight text-foreground">
-              {year}{" "}
-              <span class="mt-1 text-sm font-medium text-muted-foreground">
+            <h2 class="mb-8 flex items-center gap-2 text-2xl font-bold tracking-tight text-foreground">
+              {year} 年
+              <span class="flex h-6 items-center justify-center rounded-full bg-muted px-2.5 text-sm font-medium text-muted-foreground">
                 {postsByYearAndMonth[year].count}
               </span>
             </h2>
-            <div class="flex flex-col gap-10">
+            <div class="flex flex-col gap-10 pl-4 sm:pl-8">
               {Object.entries(postsByYearAndMonth[year].months).map(
                 ([month, data]) => (
-                  <div class="flex flex-col sm:flex-row sm:gap-8 lg:gap-12">
-                    <h3 class="mb-4 flex w-32 flex-shrink-0 items-start gap-1 text-lg font-bold text-foreground sm:mb-0">
-                      {month}{" "}
-                      <span class="mt-1 text-xs font-medium text-muted-foreground">
+                  <div class="flex flex-col sm:flex-row sm:items-start sm:gap-8 lg:gap-12">
+                    <h3 class="mb-4 flex w-32 flex-shrink-0 items-center gap-2 text-lg font-bold text-foreground sm:mt-1 sm:mb-0">
+                      {month}
+                      <span class="flex h-5 items-center justify-center rounded-full bg-muted px-2 text-xs font-medium text-muted-foreground">
                         {data.count}
                       </span>
                     </h3>
