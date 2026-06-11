@@ -20,6 +20,7 @@ pnpm run build        # Production build (astro build)
 pnpm run preview      # Preview production build (astro preview)
 pnpm run lint         # ESLint on all files
 pnpm run format       # Prettier format on TS/TSX/Astro files
+pnpm run format:check # Check formatting without writing (CI parity)
 pnpm run typecheck    # Type checking (astro check)
 pnpm run astro        # Astro CLI passthrough
 ```
@@ -73,12 +74,16 @@ Examples:
 ### Key Config Files
 | File | Purpose |
 |------|---------|
-| `astro.config.mjs` | Astro config: React integration, Tailwind Vite plugin |
+| `astro.config.mjs` | Astro config: React, MDX, Sitemap integrations; Tailwind Vite plugin; Shiki syntax highlighting with custom transformers |
 | `tsconfig.json` | TypeScript strict, path alias `@/*` |
 | `eslint.config.js` | ESLint flat config: recommended JS/TS + React Hooks + React Refresh |
 | `.prettierrc` | Prettier with Astro + Tailwind CSS plugins |
 | `components.json` | shadcn/ui configuration (component registry, aliases) |
 | `.mcp.json` | MCP server configs: shadcn (component tools), astro-docs (documentation) |
+
+### CI/CD
+- **`.github/workflows/ci.yml`** — Runs on PRs: `lint` → `format:check` → `typecheck` → `build`. Must pass to merge.
+- **`.github/renovate.json`** — Automated dependency updates via Renovate, grouped by ecosystem (astro, tailwind, typescript-eslint, git-tools). Major updates require dashboard approval.
 
 ### Adding New Pages
 1. Create a `.astro` file in `src/pages/` (or `.md` in `src/content/<collection>/` for content-driven pages)
