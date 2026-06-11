@@ -7,7 +7,7 @@ interface Props {
 
 const { headings } = Astro.props
 // Filter headings (usually depth 2 and 3 are enough for a sidebar)
-const filteredHeadings = headings.filter((heading) => heading.depth <= 3)
+const filteredHeadings = headings.filter((heading) => heading.depth <= 2)
 ---
 
 <nav class="hidden-scrollbar max-h-[calc(100vh-8rem)] overflow-y-auto">
