@@ -11,7 +11,7 @@ const filteredHeadings = headings.filter((heading) => heading.depth <= 2)
 ---
 
 <nav class="hidden-scrollbar max-h-[calc(100vh-8rem)] overflow-y-auto">
-  <h2 class="mb-4 text-lg font-semibold tracking-tight">目录</h2>
+  <h2 class="mb-4 text-base font-semibold tracking-tight">目录</h2>
   {
     filteredHeadings.length === 0 ? (
       <p class="text-sm text-muted-foreground">暂无目录</p>
