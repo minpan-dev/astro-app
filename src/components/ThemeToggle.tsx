@@ -59,8 +59,8 @@ export const ThemeToggle: React.FC = () => {
       title="切换主题"
       onClick={toggleTheme}
     >
-      <Sun className="dark:hidden" />
-      <Moon className="hidden dark:block" />
+      <Sun className="h-5 w-5 dark:hidden" />
+      <Moon className="hidden h-5 w-5 dark:block" />
     </Button>
   )
 }

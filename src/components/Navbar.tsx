@@ -16,8 +16,8 @@ const Navbar: React.FC = () => {
 
   return (
     <header className="navbar-reveal fixed top-0 z-50 w-full border-b border-transparent bg-transparent backdrop-blur-md">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+      <div className="box-border w-full p-5 sm:p-8">
+        <div className="flex items-center justify-between">
           <div className="flex-shrink-0">
             <a
               href="/"
@@ -28,9 +28,14 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* Desktop nav */}
-          <div className="hidden items-center gap-1 md:flex">
+          <div className="hidden items-center gap-2 md:flex">
             {SITE.navLinks.map((link) => (
-              <Button key={link.href} variant="ghost" asChild>
+              <Button
+                key={link.href}
+                variant="ghost"
+                className="text-base font-normal"
+                asChild
+              >
                 <a href={link.href}>{link.label}</a>
               </Button>
             ))}
@@ -58,7 +63,7 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* Mobile nav trigger */}
-          <div className="flex items-center gap-1 md:hidden">
+          <div className="flex items-center gap-2 md:hidden">
             {SITE.socials
               .filter((social) => social.showInNavbar)
               .map((social) => (
@@ -83,7 +88,7 @@ const Navbar: React.FC = () => {
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" aria-label="打开菜单">
-                  <Menu />
+                  <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[280px] pt-12">
