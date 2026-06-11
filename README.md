@@ -1,36 +1,7 @@
-# Astro + React + TypeScript + shadcn/ui
+**[minpan.dev](https://minpan.dev)**
 
-This is a template for a new Astro project with React, TypeScript, and shadcn/ui.
+My personal website
 
-## Adding components
+<br>
 
-To add components to your app, run the following command:
-
-```bash
-npx shadcn@latest add button
-```
-
-This will place the ui components in the `src/components` directory.
-
-## Using components
-
-To use the components in your app, import them in an `.astro` file:
-
-```astro
----
-import { Button } from "@/components/ui/button"
----
-
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Astro App</title>
-  </head>
-  <body>
-    <div class="grid h-screen place-items-center content-center">
-      <Button>Button</Button>
-    </div>
-  </body>
-</html>
-```
+<samp>Source code is licensed under <a href='./LICENSE'>MIT</a>.<br> Website content (articles, text, images) is licensed under <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/'>CC BY-NC-SA 4.0</a></samp>.
