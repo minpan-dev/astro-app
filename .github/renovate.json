@@ -1,0 +1,47 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "timezone": "Asia/Shanghai",
+  "minimumReleaseAge": "3 days",
+  "semanticCommits": "enabled",
+  "semanticCommitType": "chore",
+  "semanticCommitScope": "deps",
+  "prConcurrentLimit": 10,
+  "prHourlyLimit": 2,
+  "rangeStrategy": "bump",
+  "lockFileMaintenance": {
+    "enabled": true
+  },
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true
+    },
+    {
+      "matchPackageNames": ["astro", "@astrojs/*", "eslint-plugin-astro"],
+      "groupName": "astro ecosystem"
+    },
+    {
+      "matchPackageNames": [
+        "tailwindcss",
+        "@tailwindcss/*",
+        "prettier-plugin-tailwindcss"
+      ],
+      "groupName": "tailwind ecosystem"
+    },
+    {
+      "matchPackageNames": ["typescript", "eslint", "@typescript-eslint/*"],
+      "groupName": "typescript-eslint ecosystem"
+    },
+    {
+      "matchPackageNames": [
+        "husky",
+        "lint-staged",
+        "commitizen",
+        "cz-conventional-changelog",
+        "@commitlint/*"
+      ],
+      "groupName": "git workflow tools"
+    }
+  ]
+}
