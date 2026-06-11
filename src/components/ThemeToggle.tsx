@@ -1,79 +1,65 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { Moon, Sun } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-
-type Theme = "light" | "dark" | "system"
 
 export const ThemeToggle: React.FC = () => {
-  const [theme, setThemeState] = useState<Theme>(() => {
-    if (typeof localStorage !== "undefined") {
-      const stored = localStorage.getItem("theme") as Theme | null
-      if (stored && ["light", "dark", "system"].includes(stored)) {
-        return stored
-      }
+  const toggleTheme = (event: React.MouseEvent) => {
+    // The classList is our single source of truth since there might be multiple toggles
+    const currentlyDark = document.documentElement.classList.contains("dark")
+    const nextIsDark = !currentlyDark
+
+    if (
+      !document.startViewTransition ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      document.documentElement.classList.toggle("dark", nextIsDark)
+      localStorage.setItem("theme", nextIsDark ? "dark" : "light")
+      return
     }
-    return "system"
-  })
 
-  useEffect(() => {
-    if (theme !== "system") return
+    const x = event.clientX
+    const y = event.clientY
+    const endRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    )
 
-    const mq = window.matchMedia("(prefers-color-scheme: dark)")
-    const applySystem = () => {
-      document.documentElement.classList[mq.matches ? "add" : "remove"]("dark")
-    }
-    applySystem()
-    mq.addEventListener("change", applySystem)
-    return () => mq.removeEventListener("change", applySystem)
-  }, [theme])
+    const transition = document.startViewTransition(() => {
+      document.documentElement.classList.toggle("dark", nextIsDark)
+      localStorage.setItem("theme", nextIsDark ? "dark" : "light")
+    })
 
-  const setTheme = (newTheme: Theme) => {
-    setThemeState(newTheme)
-    localStorage.setItem("theme", newTheme)
+    transition.ready.then(() => {
+      const clipPath = [
+        `circle(0px at ${x}px ${y}px)`,
+        `circle(${endRadius}px at ${x}px ${y}px)`,
+      ]
 
-    if (newTheme === "dark") {
-      document.documentElement.classList.add("dark")
-    } else if (newTheme === "light") {
-      document.documentElement.classList.remove("dark")
-    } else {
-      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-      document.documentElement.classList[isDark ? "add" : "remove"]("dark")
-    }
+      document.documentElement.animate(
+        {
+          clipPath: nextIsDark ? [...clipPath].reverse() : clipPath,
+        },
+        {
+          duration: 400,
+          easing: "ease-out",
+          fill: "forwards",
+          pseudoElement: nextIsDark
+            ? "::view-transition-old(root)"
+            : "::view-transition-new(root)",
+        }
+      )
+    })
   }
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          aria-label="切换主题"
-          className="aria-expanded:bg-transparent aria-expanded:text-muted-foreground"
-        >
-          <Sun className="dark:hidden" />
-          <Moon className="hidden dark:block" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent
-        align="end"
-        onCloseAutoFocus={(e) => e.preventDefault()}
-      >
-        <DropdownMenuRadioGroup
-          value={theme}
-          onValueChange={(v) => setTheme(v as Theme)}
-        >
-          <DropdownMenuRadioItem value="light">浅色</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="dark">深色</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="system">系统</DropdownMenuRadioItem>
-        </DropdownMenuRadioGroup>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <Button
+      variant="ghost"
+      size="icon"
+      aria-label="切换主题"
+      onClick={toggleTheme}
+    >
+      <Sun className="dark:hidden" />
+      <Moon className="hidden dark:block" />
+    </Button>
   )
 }

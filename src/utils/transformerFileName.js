@@ -1,4 +1,4 @@
-export const transformerFileName = ({ style = "v2", hideDot = false } = {}) => ({
+export const transformerFileName = () => ({
   name: 'transformer-file-name',
   pre(node) {
     const raw = this.options.meta?.__raw?.split(" ");
