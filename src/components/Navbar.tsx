@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Menu } from "lucide-react"
+import { Menu, Rss } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
@@ -37,11 +37,21 @@ const Navbar: React.FC = () => {
                 <a href={link.href}>{link.label}</a>
               </Button>
             ))}
+            <Button variant="ghost" size="icon" aria-label="RSS 订阅" asChild>
+              <a href="/rss.xml" target="_blank" rel="noopener noreferrer">
+                <Rss className="h-5 w-5" />
+              </a>
+            </Button>
             <ThemeToggle />
           </div>
 
           {/* Mobile nav trigger */}
           <div className="flex items-center gap-1 md:hidden">
+            <Button variant="ghost" size="icon" aria-label="RSS 订阅" asChild>
+              <a href="/rss.xml" target="_blank" rel="noopener noreferrer">
+                <Rss className="h-5 w-5" />
+              </a>
+            </Button>
             <ThemeToggle />
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
