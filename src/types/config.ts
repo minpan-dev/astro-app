@@ -51,8 +51,16 @@ export interface ShareLink {
   generateUrl: (postUrl: string, title: string, description?: string) => string
 }
 
+export interface NavLink {
+  /** The URL path (e.g. /blog) */
+  href: string
+  /** The text displayed in the navigation bar */
+  label: string
+}
+
 export interface MinpanConfig {
   site: SiteConfig
+  navLinks: NavLink[]
   socials: SocialLink[]
   shareLinks: ShareLink[]
 }

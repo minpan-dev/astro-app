@@ -13,6 +13,10 @@ export const SITE = defineConfig({
     themeColor: "#ffffff",
     timezone: "Asia/Shanghai",
   },
+  navLinks: [
+    { href: "/blog", label: "博客" },
+    { href: "/projects", label: "项目" },
+  ],
   socials: [
     {
       name: "github",
