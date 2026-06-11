@@ -36,12 +36,10 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200))
 ---
 
 <Layout>
-  <!-- 容器放宽到 max-w-[1400px] 以容纳三列 -->
-  <div class="mx-auto max-w-[1400px] px-4 py-12 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-[1400px] px-4 py-8 sm:px-6 lg:px-8">
     <div
       class="flex flex-col lg:flex-row lg:justify-center lg:gap-12 xl:gap-20"
     >
-      <!-- 左侧占位符，用来抵消右侧目录的宽度，实现正文绝对居中 -->
       <div class="hidden w-64 shrink-0 lg:block"></div>
 
       <article class="w-full max-w-3xl min-w-0">
@@ -190,10 +188,10 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200))
           )
         }
       </article>
-      <aside
-        class="hidden w-64 shrink-0 lg:sticky lg:top-24 lg:block lg:self-start"
-      >
-        {headings.length > 0 && <TableOfContents headings={headings} />}
+      <aside class="hidden w-64 shrink-0 lg:block">
+        <div class="fixed top-24 w-64">
+          {headings.length > 0 && <TableOfContents headings={headings} />}
+        </div>
       </aside>
     </div>
     <BackToTop client:idle />
