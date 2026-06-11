@@ -7,8 +7,8 @@ import SiteBreadcrumb from "../../components/SiteBreadcrumb.astro"
 import BackToTop from "../../components/BackToTop"
 import TableOfContents from "../../components/TableOfContents.astro"
 import { Calendar, Clock, ChevronLeft, ChevronRight } from "lucide-react"
-import { SiX, SiSinaweibo } from "react-icons/si"
-import { FaQq } from "react-icons/fa"
+import { SocialIcon } from "../../components/SocialIcon"
+import { SITE } from "../../config"
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog")
@@ -32,7 +32,10 @@ const { entry, prevEntry, nextEntry } = Astro.props
 const { Content, headings } = await render(entry)
 ---
 
-<Layout>
+<Layout
+  title={`${entry.data.title} | ${SITE.site.title}`}
+  description={entry.data.description}
+>
   <div class="mx-auto max-w-[1400px] px-4 py-8 sm:px-6 lg:px-8">
     <div
       class="flex flex-col lg:flex-row lg:justify-center lg:gap-12 xl:gap-20"
@@ -95,54 +98,30 @@ const { Content, headings } = await render(entry)
             }
           </div>
           <div class="flex items-center gap-2">
-            <span class="mr-2 text-sm font-medium text-muted-foreground"
-              >分享：</span
-            >
-            <Button
-              variant="outline"
-              size="icon"
-              className="rounded-full"
-              asChild
-            >
-              <a
-                href={`https://twitter.com/intent/tweet?url=https://minpan.dev/blog/${entry.id}&text=${encodeURIComponent(entry.data.title)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="分享到 X (Twitter)"
-              >
-                <SiX className="size-4" />
-              </a>
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              className="rounded-full"
-              asChild
-            >
-              <a
-                href={`http://service.weibo.com/share/share.php?url=https://minpan.dev/blog/${entry.id}&title=${encodeURIComponent(entry.data.title)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="分享到微博"
-              >
-                <SiSinaweibo className="size-4" />
-              </a>
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              className="rounded-full"
-              asChild
-            >
-              <a
-                href={`http://connect.qq.com/widget/shareqq/index.html?url=https://minpan.dev/blog/${entry.id}&title=${encodeURIComponent(entry.data.title)}&summary=${encodeURIComponent(entry.data.description || entry.data.title)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="分享到 QQ"
-              >
-                <FaQq className="size-4" />
-              </a>
-            </Button>
+            {
+              SITE.shareLinks.map((share) => (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="rounded-full"
+                  asChild
+                >
+                  <a
+                    href={share.generateUrl(
+                      `${SITE.site.url}/blog/${entry.id}`,
+                      entry.data.title,
+                      entry.data.description
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={share.linkTitle}
+                    title={share.linkTitle}
+                  >
+                    <SocialIcon name={share.name} className="size-4" />
+                  </a>
+                </Button>
+              ))
+            }
           </div>
         </div>
 

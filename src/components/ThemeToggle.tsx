@@ -56,6 +56,7 @@ export const ThemeToggle: React.FC = () => {
       variant="ghost"
       size="icon"
       aria-label="切换主题"
+      title="切换主题"
       onClick={toggleTheme}
     >
       <Sun className="dark:hidden" />

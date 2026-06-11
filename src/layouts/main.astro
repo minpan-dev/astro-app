@@ -3,14 +3,65 @@ import { ClientRouter } from "astro:transitions"
 import "@/styles/global.css"
 import Navbar from "@/components/Navbar.tsx"
 import Footer from "@/components/Footer.tsx"
+import { SITE } from "@/config"
+
+export interface Props {
+  title?: string
+  description?: string
+  ogImage?: string
+}
+
+const {
+  title = SITE.site.title,
+  description = SITE.site.description,
+  ogImage = SITE.site.ogImage,
+} = Astro.props
+
+const canonicalURL = new URL(Astro.url.pathname, SITE.site.url).href
+const socialImageURL = new URL(ogImage!, SITE.site.url).href
 ---
 
-<html lang="zh-CN">
+<html lang={SITE.site.lang ?? "zh-CN"}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>minpan.dev</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href={SITE.site.favicon ?? "/favicon.svg"}
+    />
+    {
+      SITE.site.themeColor && (
+        <meta name="theme-color" content={SITE.site.themeColor} />
+      )
+    }
+    {
+      SITE.site.googleVerification && (
+        <meta
+          name="google-site-verification"
+          content={SITE.site.googleVerification}
+        />
+      )
+    }
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={SITE.site.author} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImageURL} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={socialImageURL} />
     <ClientRouter />
     <script is:inline>
       const applyTheme = () => {

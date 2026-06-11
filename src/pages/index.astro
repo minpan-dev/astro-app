@@ -2,8 +2,8 @@
 import Layout from "../layouts/main.astro"
 import { Button } from "../components/ui/button"
 import { Separator } from "../components/ui/separator"
-import { SiGithub } from "react-icons/si"
-import { Mail } from "lucide-react"
+import { SocialIcon } from "../components/SocialIcon"
+import { SITE } from "../config"
 ---
 
 <Layout>
@@ -14,10 +14,10 @@ import { Mail } from "lucide-react"
       <h1
         class="mb-8 text-4xl font-extrabold tracking-tight text-foreground md:text-5xl"
       >
-        你好，我是 Min Pan。
+        你好，我是 {SITE.site.author}。
       </h1>
       <p class="mb-8 text-xl leading-relaxed text-foreground/80">
-        一名前端开发工程师和设计师，致力于打造优雅、高性能的数字体验，对细节和极致美感有着执着的追求。
+        {SITE.site.description}
       </p>
       <article
         class="prose mb-12 max-w-none space-y-6 text-lg leading-relaxed text-foreground/80 prose-zinc dark:prose-invert"
@@ -34,22 +34,18 @@ import { Mail } from "lucide-react"
       <Separator className="mb-8" />
 
       <div class="flex items-center justify-start gap-4">
-        <Button variant="outline" asChild>
-          <a
-            href="https://github.com/minpan"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <SiGithub className="size-4" />
-            GitHub
-          </a>
-        </Button>
-        <Button variant="outline" asChild>
-          <a href="mailto:hello@minpan.dev">
-            <Mail className="size-4" />
-            邮箱
-          </a>
-        </Button>
+        {
+          SITE.socials
+            .filter((social) => social.showInHero)
+            .map((social) => (
+              <Button variant="outline" asChild>
+                <a href={social.url} target="_blank" rel="noopener noreferrer">
+                  <SocialIcon name={social.name} className="size-4" />
+                  {social.linkTitle}
+                </a>
+              </Button>
+            ))
+        }
       </div>
     </section>
   </div>

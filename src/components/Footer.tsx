@@ -1,7 +1,8 @@
-import { SiGithub, SiX } from "react-icons/si"
 import { Button } from "@/components/ui/button"
 import React from "react"
 import { Separator } from "@/components/ui/separator"
+import { SocialIcon } from "./SocialIcon"
+import { SITE } from "@/config"
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear()
@@ -14,36 +15,31 @@ const Footer: React.FC = () => {
             href="/"
             className="text-xl font-bold text-foreground transition-colors hover:text-foreground/80"
           >
-            minpan.dev
+            {SITE.site.title}
           </a>
 
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon" asChild>
-              <a
-                href="#"
-                aria-label="Twitter"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <SiX className="size-5" />
-              </a>
-            </Button>
-            <Button variant="ghost" size="icon" asChild>
-              <a
-                href="#"
-                aria-label="GitHub"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <SiGithub className="size-5" />
-              </a>
-            </Button>
+            {SITE.socials
+              .filter((social) => social.showInFooter)
+              .map((social) => (
+                <Button key={social.name} variant="ghost" size="icon" asChild>
+                  <a
+                    href={social.url}
+                    aria-label={social.linkTitle}
+                    title={social.linkTitle}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <SocialIcon name={social.name} className="size-5" />
+                  </a>
+                </Button>
+              ))}
           </div>
 
           <Separator className="w-full max-w-xs" />
 
           <p className="text-sm text-muted-foreground">
-            &copy; {currentYear} minpan.dev. 保留所有权利。
+            &copy; {currentYear} {SITE.site.title}. 保留所有权利。
           </p>
         </div>
       </div>

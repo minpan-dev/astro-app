@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Menu, Rss } from "lucide-react"
+import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
@@ -8,6 +8,8 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet"
 import { ThemeToggle } from "./ThemeToggle"
+import { SocialIcon } from "./SocialIcon"
+import { SITE } from "@/config"
 
 const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false)
@@ -26,7 +28,7 @@ const Navbar: React.FC = () => {
               href="/"
               className="text-2xl font-bold text-foreground transition-colors hover:text-foreground/80"
             >
-              minpan.dev
+              {SITE.site.title}
             </a>
           </div>
 
@@ -37,21 +39,51 @@ const Navbar: React.FC = () => {
                 <a href={link.href}>{link.label}</a>
               </Button>
             ))}
-            <Button variant="ghost" size="icon" aria-label="RSS 订阅" asChild>
-              <a href="/rss.xml" target="_blank" rel="noopener noreferrer">
-                <Rss className="h-5 w-5" />
-              </a>
-            </Button>
+            {SITE.socials
+              .filter((social) => social.showInNavbar)
+              .map((social) => (
+                <Button
+                  key={social.name}
+                  variant="ghost"
+                  size="icon"
+                  aria-label={social.linkTitle}
+                  asChild
+                >
+                  <a
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={social.linkTitle}
+                  >
+                    <SocialIcon name={social.name} className="h-5 w-5" />
+                  </a>
+                </Button>
+              ))}
             <ThemeToggle />
           </div>
 
           {/* Mobile nav trigger */}
           <div className="flex items-center gap-1 md:hidden">
-            <Button variant="ghost" size="icon" aria-label="RSS 订阅" asChild>
-              <a href="/rss.xml" target="_blank" rel="noopener noreferrer">
-                <Rss className="h-5 w-5" />
-              </a>
-            </Button>
+            {SITE.socials
+              .filter((social) => social.showInNavbar)
+              .map((social) => (
+                <Button
+                  key={social.name}
+                  variant="ghost"
+                  size="icon"
+                  aria-label={social.linkTitle}
+                  asChild
+                >
+                  <a
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={social.linkTitle}
+                  >
+                    <SocialIcon name={social.name} className="h-5 w-5" />
+                  </a>
+                </Button>
+              ))}
             <ThemeToggle />
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
