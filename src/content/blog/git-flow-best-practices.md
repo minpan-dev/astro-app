@@ -2,6 +2,7 @@
 title: "Git Flow 工作流：最佳实践指南"
 publishDate: 2023-05-03
 featured: true
+duration: "8 分钟阅读"
 tags:
   - Git
   - 最佳实践

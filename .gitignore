@@ -24,3 +24,6 @@ pnpm-debug.log*
 # Claude Code
 .agents/
 .claude/
+
+# Temp directories
+.tmp/

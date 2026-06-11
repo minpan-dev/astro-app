@@ -2,6 +2,7 @@
 title: "前端演进史：从静态页面到现代框架的破茧成蝶"
 publishDate: 2024-06-08
 featured: true
+duration: "12 分钟阅读"
 tags:
   - 前端
   - 架构

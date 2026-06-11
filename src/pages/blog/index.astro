@@ -2,7 +2,6 @@
 import Layout from "../../layouts/main.astro"
 import { getCollection } from "astro:content"
 import BlogCard from "../../components/BlogCard.tsx"
-import { getReadingTime } from "../../lib/utils"
 
 const allPosts = await getCollection("blog")
 const sortedPosts = allPosts.sort(
@@ -79,7 +78,7 @@ const years = Object.keys(postsByYearAndMonth)
                           date={post.data.publishDate}
                           slug={post.id}
                           tags={post.data.tags}
-                          readingTime={getReadingTime(post.body || "")}
+                          readingTime={post.data.duration}
                         />
                       ))}
                     </div>
