@@ -180,4 +180,31 @@
     padding: 2px 4px;
     border-radius: 4px;
   }
+
+  /* Navbar scroll-driven 样式 */
+  .navbar-reveal {
+    background-color: color-mix(in oklch, var(--background) 98%, transparent);
+    border-color: color-mix(in oklch, var(--border) 85%, transparent);
+  }
+
+  @supports (animation-timeline: scroll()) {
+    .navbar-reveal {
+      background-color: transparent;
+      border-color: transparent;
+      animation: navbar-bg-reveal 1ms linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 60px;
+    }
+  }
+
+  @keyframes navbar-bg-reveal {
+    from {
+      background-color: transparent;
+      border-color: transparent;
+    }
+    to {
+      background-color: color-mix(in oklch, var(--background) 98%, transparent);
+      border-color: color-mix(in oklch, var(--border) 85%, transparent);
+    }
+  }
 }
