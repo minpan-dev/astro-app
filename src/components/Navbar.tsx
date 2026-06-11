@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -10,16 +10,7 @@ import {
 import { ThemeToggle } from "./ThemeToggle"
 
 const Navbar: React.FC = () => {
-  const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
 
   const navLinks = [
     { href: "/blog", label: "博客" },
@@ -27,13 +18,7 @@ const Navbar: React.FC = () => {
   ]
 
   return (
-    <header
-      className={`fixed top-0 z-50 w-full border-b transition-all duration-300 ${
-        scrolled
-          ? "border-border/50 bg-background/95 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-background/80"
-          : "border-transparent bg-transparent"
-      }`}
-    >
+    <header className="navbar-reveal fixed top-0 z-50 w-full border-b border-transparent bg-transparent backdrop-blur-md">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex-shrink-0">
