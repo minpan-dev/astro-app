@@ -23,7 +23,14 @@ export interface SiteConfig {
   googleVerification?: string
 }
 
-export type SocialName = "github" | "twitter" | "mail" | "rss"
+export type SocialName =
+  | "github"
+  | "twitter"
+  | "mail"
+  | "rss"
+  | "weibo"
+  | "zhihu"
+  | "bilibili"
 
 export interface SocialLink {
   /** Identifier used to resolve the icon */
