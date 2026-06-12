@@ -10,7 +10,10 @@ const { headings } = Astro.props
 const filteredHeadings = headings.filter((heading) => heading.depth <= 2)
 ---
 
-<nav class="hidden-scrollbar max-h-[calc(100vh-8rem)] overflow-y-auto">
+<nav
+  class="slide-enter hidden-scrollbar max-h-[calc(100vh-8rem)] overflow-y-auto"
+  style="--enter-stage: 3;"
+>
   <h2 class="mb-4 text-base font-semibold tracking-tight">目录</h2>
   {
     filteredHeadings.length === 0 ? (
