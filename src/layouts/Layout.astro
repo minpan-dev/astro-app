@@ -16,6 +16,7 @@ const {
   title,
   description = site.description,
   ogImage = site.ogImage,
+  ogType = "website",
 } = Astro.props
 
 const displayTitle = title
@@ -68,7 +69,7 @@ const socialImageURL = new URL(ogImage!, site.url).href
     />
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={site.title} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={displayTitle} />
