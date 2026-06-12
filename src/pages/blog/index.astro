@@ -46,14 +46,11 @@ const years = Object.keys(postsByYearAndMonth)
 
 <Layout>
   <Header client:load />
-  <Main class="max-w-4xl">
-    <div class="mb-12">
-      <h1 class="mb-4 text-4xl font-bold tracking-tight md:text-5xl">博客</h1>
-      <p class="text-xl text-muted-foreground">
-        关于设计与工程的思考、教程和见解。
-      </p>
-    </div>
-
+  <Main
+    class="max-w-4xl"
+    pageTitle="博客"
+    pageDesc="关于设计与工程的思考、教程和见解。"
+  >
     <div class="flex flex-col gap-12">
       {
         years.map((year) => (
