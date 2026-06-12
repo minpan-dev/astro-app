@@ -9,6 +9,8 @@ export interface SiteConfig {
   description: string
   /** HTML lang attribute (default: "zh-CN") */
   lang?: string
+  /** Text direction: "ltr" or "rtl" (default: "ltr") */
+  dir?: "ltr" | "rtl"
   /** Path to favicon (default: "/favicon.svg") */
   favicon?: string
   /** Fallback OG image (default: "/og.png") */

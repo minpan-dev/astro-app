@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions"
+import { getAssetPath } from "@/utils/withBase"
 import config from "@/config"
 import "@/styles/global.css"
 
@@ -23,16 +24,21 @@ const socialImageURL = new URL(ogImage!, site.url).href
 ---
 
 <!doctype html>
-<html class="overflow-y-scroll scroll-smooth" lang={site.lang ?? "zh-CN"}>
+<html
+  dir={site.dir ?? "ltr"}
+  lang={site.lang ?? "zh-CN"}
+  class="overflow-y-scroll scroll-smooth"
+>
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       rel="icon"
       type="image/svg+xml"
-      href={site.favicon ?? "/favicon.svg"}
+      href={getAssetPath(site.favicon ?? "favicon.svg")}
     />
-    {site.themeColor && <meta name="theme-color" content={site.themeColor} />}
+    <!-- Filled at runtime by theme.ts to match the current background colour -->
+    <meta name="theme-color" content="" />
     {
       site.googleVerification && (
         <meta
@@ -48,16 +54,16 @@ const socialImageURL = new URL(ogImage!, site.url).href
     <meta name="author" content={site.author} />
     <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="sitemap" href={getAssetPath("sitemap-index.xml")} />
     <link
       rel="alternate"
       type="application/rss+xml"
       title={site.title}
-      href={`${site.url}/rss.xml`}
+      href={new URL(getAssetPath("rss.xml"), site.url)}
     />
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content={ogType} />
+    <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.title} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
@@ -75,7 +81,7 @@ const socialImageURL = new URL(ogImage!, site.url).href
     <slot name="head" />
 
     <!--
-      Inline FOUC-prevention script: sets the dark class on <html> before
+      Inline FOUC-prevention script: sets data-theme on <html> before
       the browser paints. Runs synchronously, no defer/async.
     -->
     <script is:inline>
@@ -84,8 +90,12 @@ const socialImageURL = new URL(ogImage!, site.url).href
         const prefersDark = window.matchMedia(
           "(prefers-color-scheme: dark)"
         ).matches
-        const isDark = stored === "dark" || (!stored && prefersDark)
-        document.documentElement.classList.toggle("dark", isDark)
+        const theme = stored ?? (prefersDark ? "dark" : "light")
+        const root = document.firstElementChild
+        root?.setAttribute("data-theme", theme)
+        root?.classList.toggle("dark", theme === "dark")
+        // Expose value so theme.ts can skip re-detection.
+        window.__theme = { value: theme }
       })()
     </script>
 
