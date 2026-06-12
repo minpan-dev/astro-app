@@ -84,9 +84,12 @@ function toggleTheme(event: MouseEvent): void {
 
 function setup(): void {
   reflect()
+  // The header renders a theme button for desktop and one for mobile, so bind all.
   document
-    .querySelector("#theme-btn")
-    ?.addEventListener("click", (event) => toggleTheme(event as MouseEvent))
+    .querySelectorAll("[data-theme-toggle]")
+    .forEach((btn) =>
+      btn.addEventListener("click", (event) => toggleTheme(event as MouseEvent))
+    )
 }
 
 setup()
