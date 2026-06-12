@@ -2,7 +2,7 @@ import { defineConfig } from "@/types/config"
 
 const config = defineConfig({
   site: {
-    title: "minpan.dev",
+    title: "MinPan",
     author: "Min Pan",
     description:
       "一名前端开发工程师和设计师，致力于打造优雅、高性能的数字体验，对细节和极致美感有着执着的追求。",

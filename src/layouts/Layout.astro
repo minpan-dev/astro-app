@@ -13,11 +13,17 @@ export interface Props {
 const { site } = config
 
 const {
-  title = site.title,
+  title,
   description = site.description,
   ogImage = site.ogImage,
   ogType = "website",
 } = Astro.props
+
+const displayTitle = title
+  ? title.includes(site.title)
+    ? title
+    : `${title} | ${site.title}`
+  : site.title
 
 const canonicalURL = new URL(Astro.url.pathname, site.url).href
 const socialImageURL = new URL(ogImage!, site.url).href
@@ -48,8 +54,8 @@ const socialImageURL = new URL(ogImage!, site.url).href
       )
     }
 
-    <title>{title}</title>
-    <meta name="title" content={title} />
+    <title>{displayTitle}</title>
+    <meta name="title" content={displayTitle} />
     <meta name="description" content={description} />
     <meta name="author" content={site.author} />
     <link rel="canonical" href={canonicalURL} />
@@ -66,14 +72,14 @@ const socialImageURL = new URL(ogImage!, site.url).href
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.title} />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={title} />
+    <meta property="og:title" content={displayTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={socialImageURL} />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
-    <meta property="twitter:title" content={title} />
+    <meta property="twitter:title" content={displayTitle} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={socialImageURL} />
 
