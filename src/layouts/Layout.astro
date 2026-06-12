@@ -43,8 +43,8 @@ const socialImageURL = ogImage ? new URL(ogImage, site.url).href : undefined
       type="image/svg+xml"
       href={getAssetPath(site.favicon ?? "favicon.svg")}
     />
-    <!-- Filled at runtime by theme.ts to match the current background colour -->
-    <meta name="theme-color" content="" />
+    <!-- Sensible default; theme.ts refines it at runtime to match the background colour -->
+    <meta name="theme-color" content={site.themeColor ?? "#ffffff"} />
     {
       site.googleVerification && (
         <meta
@@ -120,6 +120,16 @@ const socialImageURL = ogImage ? new URL(ogImage, site.url).href : undefined
       import "@/scripts/theme"
       import "@/scripts/copyCode"
 
+      // Keep the statically-rendered footer year current without a rebuild.
+      function updateFooterYear(): void {
+        const el = document.querySelector<HTMLElement>("[data-footer-year]")
+        if (!el) return
+        const start = Number(el.dataset.startYear)
+        if (!start) return
+        const now = new Date().getFullYear()
+        el.textContent = now > start ? `${start}-${now}` : `${start}`
+      }
+
       // Trigger on initial page load
       NProgress.start()
 
@@ -128,6 +138,7 @@ const socialImageURL = ogImage ? new URL(ogImage, site.url).href : undefined
       })
       document.addEventListener("astro:page-load", () => {
         NProgress.done()
+        updateFooterYear()
       })
     </script>
   </body>
