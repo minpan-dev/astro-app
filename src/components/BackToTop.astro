@@ -32,15 +32,16 @@ import { cn } from "@/lib/utils"
     el.classList.toggle("pointer-events-none", !show)
   }
 
-  // The window survives View Transitions, so register the scroll listener once.
+  // The document survives View Transitions, so register listeners once.
+  // Click is delegated from the document, avoiding re-binding the swapped
+  // button on every navigation (which would accumulate listeners).
   window.addEventListener("scroll", update, { passive: true })
 
-  document.addEventListener("astro:page-load", () => {
-    update()
-    document
-      .querySelector("#back-to-top button")
-      ?.addEventListener("click", () =>
-        window.scrollTo({ top: 0, behavior: "smooth" })
-      )
+  document.addEventListener("click", (event) => {
+    if ((event.target as Element).closest("#back-to-top button")) {
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    }
   })
+
+  document.addEventListener("astro:page-load", update)
 </script>

@@ -22,7 +22,10 @@ const Footer: React.FC = () => {
               CC BY-NC-SA 4.0
             </a>
             <span>
-              {yearRange} &copy; {config.site.title}
+              <span data-footer-year data-start-year={START_YEAR}>
+                {yearRange}
+              </span>{" "}
+              &copy; {config.site.title}
             </span>
           </div>
         </div>
