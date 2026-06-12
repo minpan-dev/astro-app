@@ -1,7 +1,13 @@
 import React from "react"
 import config from "@/config"
 
+const START_YEAR = 2026
+
 const Footer: React.FC = () => {
+  const currentYear = new Date().getFullYear()
+  const yearRange =
+    currentYear > START_YEAR ? `${START_YEAR}-${currentYear}` : `${START_YEAR}`
+
   return (
     <footer className="box-border w-full">
       <div className="p-5 sm:p-8">
@@ -15,7 +21,9 @@ const Footer: React.FC = () => {
             >
               CC BY-NC-SA 4.0
             </a>
-            <span>2026-PRESENT &copy; {config.site.title}</span>
+            <span>
+              {yearRange} &copy; {config.site.title}
+            </span>
           </div>
         </div>
       </div>
