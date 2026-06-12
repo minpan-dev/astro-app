@@ -126,11 +126,17 @@
     @apply bg-background text-foreground;
     }
   html {
-    @apply font-sans scroll-smooth;
+    @apply font-sans;
     }
   [id] {
     @apply scroll-mt-24;
     }
+  /* Only enable smooth scrolling when the user hasn't asked to reduce motion. */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
 }
 
 @layer components {
