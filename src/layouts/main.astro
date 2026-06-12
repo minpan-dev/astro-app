@@ -1,27 +1,30 @@
 ---
 import { ClientRouter } from "astro:transitions"
-import "@/styles/global.css"
 import Navbar from "@/components/Navbar.tsx"
 import Footer from "@/components/Footer.tsx"
 import { SITE } from "@/config"
+import "@/styles/global.css"
 
 export interface Props {
   title?: string
   description?: string
   ogImage?: string
+  ogType?: "website" | "article"
 }
 
 const {
   title = SITE.site.title,
   description = SITE.site.description,
   ogImage = SITE.site.ogImage,
+  ogType = "website",
 } = Astro.props
 
 const canonicalURL = new URL(Astro.url.pathname, SITE.site.url).href
 const socialImageURL = new URL(ogImage!, SITE.site.url).href
 ---
 
-<html lang={SITE.site.lang ?? "zh-CN"}>
+<!doctype html>
+<html class="overflow-y-scroll scroll-smooth" lang={SITE.site.lang ?? "zh-CN"}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -45,12 +48,22 @@ const socialImageURL = new URL(ogImage!, SITE.site.url).href
     }
 
     <title>{title}</title>
+    <meta name="title" content={title} />
     <meta name="description" content={description} />
     <meta name="author" content={SITE.site.author} />
     <link rel="canonical" href={canonicalURL} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={SITE.site.title}
+      href={`${SITE.site.url}/rss.xml`}
+    />
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={SITE.site.title} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -62,6 +75,10 @@ const socialImageURL = new URL(ogImage!, SITE.site.url).href
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={socialImageURL} />
+
+    <!-- Slot for additional head elements like JSON-LD or article tags -->
+    <slot name="head" />
+
     <ClientRouter />
     <script is:inline>
       const applyTheme = () => {
