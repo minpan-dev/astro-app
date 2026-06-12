@@ -1,7 +1,7 @@
 ---
 import { render } from "astro:content"
 import type { CollectionEntry } from "astro:content"
-import Layout from "@/layouts/main.astro"
+import PageLayout from "@/layouts/PageLayout.astro"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import SiteBreadcrumb from "@/components/SiteBreadcrumb.astro"
@@ -42,7 +42,7 @@ const structuredData = {
 }
 ---
 
-<Layout
+<PageLayout
   title={`${entry.data.title} | ${site.title}`}
   description={entry.data.description}
   ogImage={entry.data.image}
@@ -200,4 +200,4 @@ const structuredData = {
     </div>
     <BackToTop client:idle />
   </div>
-</Layout>
+</PageLayout>

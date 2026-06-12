@@ -1,0 +1,28 @@
+---
+import Layout from "@/layouts/Layout.astro"
+import Navbar from "@/components/Navbar.tsx"
+import Footer from "@/components/Footer.tsx"
+
+export interface Props {
+  title?: string
+  description?: string
+  ogImage?: string
+  ogType?: "website" | "article"
+}
+
+const { title, description, ogImage, ogType } = Astro.props
+---
+
+<Layout
+  title={title}
+  description={description}
+  ogImage={ogImage}
+  ogType={ogType}
+>
+  <slot name="head" slot="head" />
+  <Navbar client:load />
+  <main class="flex flex-grow flex-col pt-20 sm:pt-28">
+    <slot />
+  </main>
+  <Footer />
+</Layout>

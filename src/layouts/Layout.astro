@@ -1,0 +1,103 @@
+---
+import { ClientRouter } from "astro:transitions"
+import config from "@/config"
+import "@/styles/global.css"
+
+export interface Props {
+  title?: string
+  description?: string
+  ogImage?: string
+  ogType?: "website" | "article"
+}
+const { site } = config
+
+const {
+  title = site.title,
+  description = site.description,
+  ogImage = site.ogImage,
+  ogType = "website",
+} = Astro.props
+
+const canonicalURL = new URL(Astro.url.pathname, site.url).href
+const socialImageURL = new URL(ogImage!, site.url).href
+---
+
+<!doctype html>
+<html class="overflow-y-scroll scroll-smooth" lang={site.lang ?? "zh-CN"}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href={site.favicon ?? "/favicon.svg"}
+    />
+    {site.themeColor && <meta name="theme-color" content={site.themeColor} />}
+    {
+      site.googleVerification && (
+        <meta
+          name="google-site-verification"
+          content={site.googleVerification}
+        />
+      )
+    }
+
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="author" content={site.author} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={site.title}
+      href={`${site.url}/rss.xml`}
+    />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={site.title} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImageURL} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={socialImageURL} />
+
+    <!-- Slot for additional head elements like JSON-LD or article tags -->
+    <slot name="head" />
+
+    <!--
+      Inline FOUC-prevention script: sets the dark class on <html> before
+      the browser paints. Runs synchronously, no defer/async.
+    -->
+    <script is:inline>
+      ;(function () {
+        const stored = localStorage.getItem("theme")
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches
+        const isDark = stored === "dark" || (!stored && prefersDark)
+        document.documentElement.classList.toggle("dark", isDark)
+      })()
+    </script>
+
+    <ClientRouter />
+  </head>
+  <body
+    class="flex min-h-svh flex-col bg-background font-sans text-foreground antialiased selection:bg-primary selection:text-primary-foreground"
+  >
+    <slot />
+    <script>
+      import "@/scripts/theme"
+      import "@/scripts/copyCode"
+    </script>
+  </body>
+</html>
