@@ -1,7 +1,7 @@
 ---
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { ThemeToggle } from "@/components/ThemeToggle"
+import ThemeToggle from "@/components/ThemeToggle.astro"
 import { SocialIcon } from "@/components/SocialIcon"
 import MobileMenu from "@/components/MobileMenu"
 import config from "@/config"
@@ -53,7 +53,7 @@ const navbarSocials = socials.filter((social) => social.showInNavbar)
             </a>
           ))
         }
-        <ThemeToggle client:idle />
+        <ThemeToggle />
       </div>
 
       {/* Mobile nav */}
@@ -72,7 +72,7 @@ const navbarSocials = socials.filter((social) => social.showInNavbar)
             </a>
           ))
         }
-        <ThemeToggle client:idle />
+        <ThemeToggle />
         <MobileMenu client:media="(max-width: 767px)" navLinks={navLinks} />
       </div>
     </div>
