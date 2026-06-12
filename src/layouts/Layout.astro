@@ -26,7 +26,7 @@ const displayTitle = title
   : site.title
 
 const canonicalURL = new URL(Astro.url.pathname, site.url).href
-const socialImageURL = new URL(ogImage!, site.url).href
+const socialImageURL = ogImage ? new URL(ogImage, site.url).href : undefined
 ---
 
 <!doctype html>
@@ -74,14 +74,18 @@ const socialImageURL = new URL(ogImage!, site.url).href
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={displayTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={socialImageURL} />
+    {socialImageURL && <meta property="og:image" content={socialImageURL} />}
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={displayTitle} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={socialImageURL} />
+    {
+      socialImageURL && (
+        <meta property="twitter:image" content={socialImageURL} />
+      )
+    }
 
     <!-- Slot for additional head elements like JSON-LD or article tags -->
     <slot name="head" />
