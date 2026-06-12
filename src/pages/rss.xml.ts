@@ -18,7 +18,7 @@ export async function GET(context: APIContext) {
 
   return rss({
     title: "minpan.dev | Blog",
-    description: "我最博文与法",
+    description: "我的最新博客文章与想法。",
     site,
     items: blog.map((post) => ({
       title: post.data.title,
