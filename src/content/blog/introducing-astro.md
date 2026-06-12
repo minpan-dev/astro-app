@@ -2,7 +2,6 @@
 title: "深入浅出 Astro：打造极速的现代化内容驱动网站"
 publishDate: 2022-10-05
 featured: true
-duration: "10 分钟阅读"
 tags:
   - Astro
   - Web开发
