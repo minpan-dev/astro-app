@@ -8,7 +8,7 @@ import Footer from "@/components/Footer.tsx"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import BackButton from "@/components/BackButton.astro"
-import BackToTop from "@/components/BackToTop"
+import BackToTop from "@/components/BackToTop.astro"
 import TableOfContents from "@/components/TableOfContents.astro"
 import { Calendar, Clock, ChevronLeft, ChevronRight } from "lucide-react"
 import { SocialIcon } from "@/components/SocialIcon"
@@ -202,7 +202,7 @@ const structuredData = {
         </div>
       </aside>
     </div>
-    <BackToTop client:idle />
+    <BackToTop />
   </Main>
   <Footer />
 </Layout>

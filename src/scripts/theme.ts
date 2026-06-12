@@ -30,7 +30,6 @@ function reflect(): void {
   const root = document.firstElementChild
   root?.setAttribute("data-theme", themeValue)
   root?.classList.toggle("dark", themeValue === DARK)
-  document.querySelector("#theme-btn")?.setAttribute("aria-label", themeValue)
 
   // Fill <meta name="theme-color"> with the computed background colour so
   // Android's browser chrome matches the page background.
@@ -40,12 +39,54 @@ function reflect(): void {
     ?.setAttribute("content", bg)
 }
 
+// Toggle the theme, with a circular view-transition reveal from the click point
+// when the browser supports it and the user hasn't requested reduced motion.
+function toggleTheme(event: MouseEvent): void {
+  const nextIsDark = themeValue !== DARK
+  themeValue = nextIsDark ? DARK : LIGHT
+
+  if (
+    !document.startViewTransition ||
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    persist()
+    return
+  }
+
+  const x = event.clientX
+  const y = event.clientY
+  const endRadius = Math.hypot(
+    Math.max(x, window.innerWidth - x),
+    Math.max(y, window.innerHeight - y)
+  )
+
+  const transition = document.startViewTransition(() => persist())
+
+  transition.ready.then(() => {
+    const clipPath = [
+      `circle(0px at ${x}px ${y}px)`,
+      `circle(${endRadius}px at ${x}px ${y}px)`,
+    ]
+
+    document.documentElement.animate(
+      { clipPath: nextIsDark ? [...clipPath].reverse() : clipPath },
+      {
+        duration: 400,
+        easing: "ease-out",
+        fill: "forwards",
+        pseudoElement: nextIsDark
+          ? "::view-transition-old(root)"
+          : "::view-transition-new(root)",
+      }
+    )
+  })
+}
+
 function setup(): void {
   reflect()
-  document.querySelector("#theme-btn")?.addEventListener("click", () => {
-    themeValue = themeValue === LIGHT ? DARK : LIGHT
-    persist()
-  })
+  document
+    .querySelector("#theme-btn")
+    ?.addEventListener("click", (event) => toggleTheme(event as MouseEvent))
 }
 
 setup()
