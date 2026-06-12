@@ -10,12 +10,16 @@ import {
   transformerNotationHighlight,
   transformerNotationWordHighlight,
 } from "@shikijs/transformers"
-import { transformerFileName } from "./src/utils/transformerFileName.js";
-import { transformerCopyCode } from "./src/utils/transformerCopyCode.js";
+import { transformerFileName } from "./src/utils/transformerFileName.js"
+import { transformerCopyCode } from "./src/utils/transformerCopyCode.js"
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://minpan.dev',
+  site: "https://minpan.dev",
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: "viewport",
+  },
   vite: {
     plugins: [tailwindcss()],
   },
@@ -33,9 +37,5 @@ export default defineConfig({
       ],
     },
   },
-  integrations: [
-    react(),
-    mdx(),
-    sitemap()
-  ],
+  integrations: [react(), mdx(), sitemap()],
 })
