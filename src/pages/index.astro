@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/main.astro"
 import { SocialIcon } from "../components/SocialIcon"
-import { SITE } from "../config"
+import config from "../config"
 import {
   SiReact,
   SiVuedotjs,
@@ -22,6 +22,8 @@ import {
   SiOpenai,
   SiGoogle,
 } from "react-icons/si"
+
+const { site, socials } = config
 ---
 
 <Layout>
@@ -34,7 +36,7 @@ import {
       <h1
         class="mb-8 text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl"
       >
-        Hey，我是 {SITE.site.author}
+        Hey，我是 {site.author}
       </h1>
 
       <p>
@@ -253,7 +255,7 @@ import {
 
       <div class="not-prose mb-6 flex flex-wrap gap-4">
         {
-          SITE.socials
+          socials
             .filter((social) => social.showInHero)
             .map((social) => (
               <a

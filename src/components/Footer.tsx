@@ -1,5 +1,5 @@
 import React from "react"
-import { SITE } from "@/config"
+import config from "@/config"
 
 const Footer: React.FC = () => {
   return (
@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
             >
               CC BY-NC-SA 4.0
             </a>
-            <span>2026-PRESENT &copy; {SITE.site.title}</span>
+            <span>2026-PRESENT &copy; {config.site.title}</span>
           </div>
         </div>
       </div>

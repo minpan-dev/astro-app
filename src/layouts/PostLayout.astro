@@ -9,7 +9,7 @@ import BackToTop from "../components/BackToTop"
 import TableOfContents from "../components/TableOfContents.astro"
 import { Calendar, Clock, ChevronLeft, ChevronRight } from "lucide-react"
 import { SocialIcon } from "../components/SocialIcon"
-import { SITE } from "../config"
+import config from "../config"
 
 export interface Props {
   entry: CollectionEntry<"blog">
@@ -20,28 +20,30 @@ export interface Props {
 const { entry, prevEntry, nextEntry } = Astro.props
 const { Content, headings } = await render(entry)
 
+const { site, shareLinks } = config
+
 const ogImage = entry.data.image
   ? new URL(entry.data.image!, Astro.url).href
-  : new URL(SITE.site.ogImage!, Astro.url).href
+  : new URL(site.ogImage!, Astro.url).href
 
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  headline: entry.data.title ?? SITE.site.title,
+  headline: entry.data.title ?? site.title,
   image: ogImage,
   datePublished: entry.data.publishDate.toISOString(),
   author: [
     {
       "@type": "Person",
-      name: SITE.site.author,
-      url: SITE.site.url,
+      name: site.author,
+      url: site.url,
     },
   ],
 }
 ---
 
 <Layout
-  title={`${entry.data.title} | ${SITE.site.title}`}
+  title={`${entry.data.title} | ${site.title}`}
   description={entry.data.description}
   ogImage={entry.data.image}
   ogType="article"
@@ -121,7 +123,7 @@ const structuredData = {
           </div>
           <div class="flex items-center gap-2">
             {
-              SITE.shareLinks.map((share) => (
+              shareLinks.map((share) => (
                 <Button
                   variant="ghost"
                   size="icon"
@@ -130,7 +132,7 @@ const structuredData = {
                 >
                   <a
                     href={share.generateUrl(
-                      `${SITE.site.url}/blog/${entry.id}`,
+                      `${site.url}/blog/${entry.id}`,
                       entry.data.title,
                       entry.data.description
                     )}

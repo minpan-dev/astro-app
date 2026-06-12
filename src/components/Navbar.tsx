@@ -9,7 +9,8 @@ import {
 } from "@/components/ui/sheet"
 import { ThemeToggle } from "./ThemeToggle"
 import { SocialIcon } from "./SocialIcon"
-import { SITE } from "@/config"
+import config from "@/config"
+const { site, navLinks, socials } = config
 
 const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false)
@@ -23,13 +24,13 @@ const Navbar: React.FC = () => {
               href="/"
               className="text-2xl font-bold text-foreground transition-colors hover:text-foreground/80"
             >
-              {SITE.site.title}
+              {site.title}
             </a>
           </div>
 
           {/* Desktop nav */}
           <div className="hidden items-center gap-2 md:flex">
-            {SITE.navLinks.map((link) => (
+            {navLinks.map((link) => (
               <Button
                 key={link.href}
                 variant="ghost"
@@ -39,7 +40,7 @@ const Navbar: React.FC = () => {
                 <a href={link.href}>{link.label}</a>
               </Button>
             ))}
-            {SITE.socials
+            {socials
               .filter((social) => social.showInNavbar)
               .map((social) => (
                 <Button
@@ -64,7 +65,7 @@ const Navbar: React.FC = () => {
 
           {/* Mobile nav trigger */}
           <div className="flex items-center gap-2 md:hidden">
-            {SITE.socials
+            {socials
               .filter((social) => social.showInNavbar)
               .map((social) => (
                 <Button
@@ -94,7 +95,7 @@ const Navbar: React.FC = () => {
               <SheetContent side="right" className="w-[280px] pt-12">
                 <SheetTitle className="sr-only">导航菜单</SheetTitle>
                 <nav className="flex flex-col gap-2">
-                  {SITE.navLinks.map((link) => (
+                  {navLinks.map((link) => (
                     <Button
                       key={link.href}
                       variant="ghost"

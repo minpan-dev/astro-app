@@ -1,6 +1,6 @@
 import { defineConfig } from "./types/config"
 
-export const SITE = defineConfig({
+const config = defineConfig({
   site: {
     title: "minpan.dev",
     author: "Min Pan",
@@ -85,3 +85,5 @@ export const SITE = defineConfig({
     },
   ],
 })
+
+export default config
