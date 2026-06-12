@@ -17,7 +17,7 @@ const Header: React.FC = () => {
 
   return (
     <header className="navbar-reveal fixed top-0 z-50 w-full border-b border-transparent bg-transparent backdrop-blur-md">
-      <div className="box-border w-full p-5 sm:p-8">
+      <div className="box-border w-full px-5 py-4 sm:px-8 sm:py-5">
         <div className="flex items-center justify-between">
           <div className="flex-shrink-0">
             <a
