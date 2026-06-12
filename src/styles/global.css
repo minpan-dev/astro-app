@@ -208,7 +208,7 @@
     }
   }
 
-  /* Slide enter animations from antfu.me */
+  /* Slide enter animations */
   @keyframes slide-enter {
     0% {
       transform: translateY(10px);
@@ -271,4 +271,20 @@
 }
 .dark::view-transition-new(root) {
   z-index: 1;
+}
+
+/* NProgress */
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--foreground);
+  opacity: 0.75;
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
 }
