@@ -26,8 +26,8 @@ const { Content, headings } = await render(entry)
 const { site, shareLinks } = config
 
 const ogImage = entry.data.image
-  ? new URL(entry.data.image!, Astro.url).href
-  : new URL(site.ogImage!, Astro.url).href
+  ? new URL(entry.data.image, Astro.url).href
+  : new URL(`/og/${entry.id}.png`, Astro.url).href
 
 const structuredData = {
   "@context": "https://schema.org",
