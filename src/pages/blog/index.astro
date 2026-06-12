@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro"
-import Header from "@/components/Header.tsx"
+import Header from "@/components/Header.astro"
 import Main from "@/components/Main.astro"
 import Footer from "@/components/Footer.tsx"
 import { getCollection } from "astro:content"
@@ -45,7 +45,7 @@ const years = Object.keys(postsByYearAndMonth)
 ---
 
 <Layout title="博客" ogType="website">
-  <Header client:load />
+  <Header />
   <Main
     class="max-w-4xl"
     pageTitle="博客"

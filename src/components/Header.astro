@@ -1,0 +1,80 @@
+---
+import { buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+import { ThemeToggle } from "@/components/ThemeToggle"
+import { SocialIcon } from "@/components/SocialIcon"
+import MobileMenu from "@/components/MobileMenu"
+import config from "@/config"
+
+const { site, navLinks, socials } = config
+const navbarSocials = socials.filter((social) => social.showInNavbar)
+---
+
+<header
+  class="navbar-reveal fixed top-0 z-50 w-full border-b border-transparent bg-transparent backdrop-blur-md"
+>
+  <div class="box-border w-full px-5 py-4 sm:px-8 sm:py-5">
+    <div class="flex items-center justify-between">
+      <div class="flex-shrink-0">
+        <a
+          href="/"
+          class="text-2xl font-bold text-foreground transition-colors hover:text-foreground/80"
+        >
+          {site.title}
+        </a>
+      </div>
+
+      {/* Desktop nav */}
+      <div class="hidden items-center gap-2 md:flex">
+        {
+          navLinks.map((link) => (
+            <a
+              href={link.href}
+              class={cn(
+                buttonVariants({ variant: "ghost" }),
+                "text-base font-normal"
+              )}
+            >
+              {link.label}
+            </a>
+          ))
+        }
+        {
+          navbarSocials.map((social) => (
+            <a
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={social.linkTitle}
+              aria-label={social.linkTitle}
+              class={buttonVariants({ variant: "ghost", size: "icon" })}
+            >
+              <SocialIcon name={social.name} className="h-5 w-5" />
+            </a>
+          ))
+        }
+        <ThemeToggle client:idle />
+      </div>
+
+      {/* Mobile nav */}
+      <div class="flex items-center gap-2 md:hidden">
+        {
+          navbarSocials.map((social) => (
+            <a
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={social.linkTitle}
+              aria-label={social.linkTitle}
+              class={buttonVariants({ variant: "ghost", size: "icon" })}
+            >
+              <SocialIcon name={social.name} className="h-5 w-5" />
+            </a>
+          ))
+        }
+        <ThemeToggle client:idle />
+        <MobileMenu client:media="(max-width: 767px)" navLinks={navLinks} />
+      </div>
+    </div>
+  </div>
+</header>
