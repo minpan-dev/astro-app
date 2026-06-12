@@ -20,21 +20,25 @@ const sortedProjects = allProjects.sort(
     pageDesc="我开发的一些前端、后端和全栈项目精选。"
   >
     <div class="space-y-12">
-      <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <div
+        class="slide-enter-content grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
+      >
         {
           sortedProjects.map((project) => (
-            <ProjectCard
-              client:load
-              title={project.data.title}
-              description={project.data.description}
-              date={project.data.publishDate}
-              tags={project.data.tags}
-              image={project.data.image}
-              githubUrl={project.data.githubUrl}
-              license={project.data.license}
-              status={project.data.status}
-              language={project.data.language}
-            />
+            <div class="h-full w-full">
+              <ProjectCard
+                client:load
+                title={project.data.title}
+                description={project.data.description}
+                date={project.data.publishDate}
+                tags={project.data.tags}
+                image={project.data.image}
+                githubUrl={project.data.githubUrl}
+                license={project.data.license}
+                status={project.data.status}
+                language={project.data.language}
+              />
+            </div>
           ))
         }
       </div>
