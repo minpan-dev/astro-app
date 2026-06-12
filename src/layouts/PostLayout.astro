@@ -12,6 +12,7 @@ import BackToTop from "@/components/BackToTop"
 import TableOfContents from "@/components/TableOfContents.astro"
 import { Calendar, Clock, ChevronLeft, ChevronRight } from "lucide-react"
 import { SocialIcon } from "@/components/SocialIcon"
+import { getReadingTime } from "@/utils/readingTime"
 import config from "@/config"
 
 export interface Props {
@@ -22,6 +23,7 @@ export interface Props {
 
 const { entry, prevEntry, nextEntry } = Astro.props
 const { Content, headings } = await render(entry)
+const readingTime = getReadingTime(entry.body ?? "")
 
 const { site, shareLinks } = config
 
@@ -93,14 +95,10 @@ const structuredData = {
                 }
               </time>
             </div>
-            {
-              entry.data.duration && (
-                <div class="flex items-center gap-1.5">
-                  <Clock className="size-4" />
-                  <span>{entry.data.duration}</span>
-                </div>
-              )
-            }
+            <div class="flex items-center gap-1.5">
+              <Clock className="size-4" />
+              <span>{readingTime}</span>
+            </div>
           </div>
         </header>
 

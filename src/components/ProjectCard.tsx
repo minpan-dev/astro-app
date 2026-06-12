@@ -54,23 +54,35 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   status,
   language,
 }: ProjectCardProps) => {
+  const imageWrapperClass =
+    "relative block aspect-[2/1] w-full overflow-hidden border-b border-border/30 bg-muted"
+  const image_ = image ? (
+    <img
+      src={image}
+      alt={title}
+      className="h-full w-full object-cover object-center"
+      loading="lazy"
+    />
+  ) : null
+
   return (
     <Card className="group relative flex h-full flex-col overflow-hidden bg-card/40 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl">
-      {image && (
-        <a
-          href={githubUrl || "#"}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="relative block aspect-[2/1] w-full overflow-hidden border-b border-border/30 bg-muted"
-        >
-          <img
-            src={image}
-            alt={title}
-            className="h-full w-full object-cover object-center"
-            loading="lazy"
-          />
-        </a>
-      )}
+      {image_ &&
+        (githubUrl ? (
+          // Decorative duplicate of the title link; hidden from AT and keyboard.
+          <a
+            href={githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-hidden
+            tabIndex={-1}
+            className={imageWrapperClass}
+          >
+            {image_}
+          </a>
+        ) : (
+          <div className={imageWrapperClass}>{image_}</div>
+        ))}
 
       <CardHeader className="relative z-10 flex-grow pb-4">
         <div className="mb-2 flex items-center justify-between">
@@ -84,16 +96,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             })}
           </time>
         </div>
-        <a
-          href={githubUrl || "#"}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group/link block"
-        >
-          <CardTitle className="text-xl leading-tight transition-colors group-hover/link:text-primary">
-            {title}
-          </CardTitle>
-        </a>
+        {githubUrl ? (
+          <a
+            href={githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group/link block"
+          >
+            <CardTitle className="text-xl leading-tight transition-colors group-hover/link:text-primary">
+              {title}
+            </CardTitle>
+          </a>
+        ) : (
+          <CardTitle className="text-xl leading-tight">{title}</CardTitle>
+        )}
         <CardDescription className="mt-2 line-clamp-3 text-sm">
           {description}
         </CardDescription>

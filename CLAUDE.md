@@ -4,12 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-An Astro v6 + React 19 application with Tailwind CSS v4, shadcn/ui (Radix UI Nova style), and TypeScript 6. Uses pnpm as the package manager. Requires Node >= 22.12.0.
+An Astro v6 + React 19 application with Tailwind CSS v4, shadcn/ui (Radix UI Nova style), and TypeScript 6. Uses pnpm as the package manager. Requires Node >=22.22.3.
 
 ## Quick Start
 
 ```bash
-pnpm install           # Install dependencies (Node >= 22.12.0 required)
+pnpm install           # Install dependencies (Node >=22.22.3 required)
 ```
 
 ## Commands
