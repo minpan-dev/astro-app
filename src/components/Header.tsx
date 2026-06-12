@@ -12,7 +12,7 @@ import { SocialIcon } from "@/components/SocialIcon"
 import config from "@/config"
 const { site, navLinks, socials } = config
 
-const Navbar: React.FC = () => {
+const Header: React.FC = () => {
   const [open, setOpen] = useState(false)
 
   return (
@@ -117,4 +117,4 @@ const Navbar: React.FC = () => {
   )
 }
 
-export default Navbar
+export default Header

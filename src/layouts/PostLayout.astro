@@ -1,10 +1,13 @@
 ---
 import { render } from "astro:content"
 import type { CollectionEntry } from "astro:content"
-import PageLayout from "@/layouts/PageLayout.astro"
+import Layout from "@/layouts/Layout.astro"
+import Header from "@/components/Header.tsx"
+import Main from "@/components/Main.astro"
+import Footer from "@/components/Footer.tsx"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import SiteBreadcrumb from "@/components/SiteBreadcrumb.astro"
+import BackButton from "@/components/BackButton.astro"
 import BackToTop from "@/components/BackToTop"
 import TableOfContents from "@/components/TableOfContents.astro"
 import { Calendar, Clock, ChevronLeft, ChevronRight } from "lucide-react"
@@ -42,7 +45,7 @@ const structuredData = {
 }
 ---
 
-<PageLayout
+<Layout
   title={`${entry.data.title} | ${site.title}`}
   description={entry.data.description}
   ogImage={entry.data.image}
@@ -60,144 +63,148 @@ const structuredData = {
     />
   </Fragment>
 
-  <div class="mx-auto max-w-[1400px] px-4 py-8 sm:px-6 lg:px-8">
-    <div
-      class="flex flex-col lg:flex-row lg:justify-center lg:gap-12 xl:gap-20"
-    >
-      <div class="hidden w-64 shrink-0 lg:block"></div>
+  <Header client:load />
+  <Main recordBackUrl={false}>
+    <div class="mx-auto max-w-[1400px] px-4 py-8 sm:px-6 lg:px-8">
+      <div
+        class="flex flex-col lg:flex-row lg:justify-center lg:gap-12 xl:gap-20"
+      >
+        <div class="hidden w-64 shrink-0 lg:block"></div>
 
-      <article class="w-full max-w-3xl min-w-0">
-        <SiteBreadcrumb className="mb-8" customTitle={entry.data.title} />
-        <header class="mb-12 text-left">
-          <h1 class="mb-6 text-4xl font-extrabold tracking-tight md:text-5xl">
-            {entry.data.title}
-          </h1>
-          <div
-            class="flex items-center justify-start gap-4 text-sm text-muted-foreground"
-          >
-            <div class="flex items-center gap-1.5">
-              <Calendar className="size-4" />
-              <time datetime={entry.data.publishDate.toISOString()}>
-                {
-                  entry.data.publishDate.toLocaleDateString("zh-CN", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })
-                }
-              </time>
-            </div>
-            {
-              entry.data.duration && (
-                <div class="flex items-center gap-1.5">
-                  <Clock className="size-4" />
-                  <span>{entry.data.duration}</span>
-                </div>
-              )
-            }
-          </div>
-        </header>
-
-        <div
-          class="prose prose-base mb-12 max-w-none dark:prose-invert prose-headings:font-bold prose-a:text-primary hover:prose-a:text-primary/80"
-        >
-          <Content />
-        </div>
-
-        <div
-          class="mt-8 flex flex-col justify-between gap-6 border-t border-border/50 pt-8 sm:flex-row sm:items-center"
-        >
-          <div class="flex-1">
-            {
-              entry.data.tags && entry.data.tags.length > 0 && (
-                <div class="flex flex-wrap items-center gap-2">
-                  <span class="mr-2 text-sm font-medium text-muted-foreground">
-                    标签：
-                  </span>
-                  {entry.data.tags.map((tag) => (
-                    <Badge variant="secondary">{tag}</Badge>
-                  ))}
-                </div>
-              )
-            }
-          </div>
-          <div class="flex items-center gap-2">
-            {
-              shareLinks.map((share) => (
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="rounded-full"
-                  asChild
-                >
-                  <a
-                    href={share.generateUrl(
-                      `${site.url}/blog/${entry.id}`,
-                      entry.data.title,
-                      entry.data.description
-                    )}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={share.linkTitle}
-                    title={share.linkTitle}
-                  >
-                    <SocialIcon name={share.name} className="size-4" />
-                  </a>
-                </Button>
-              ))
-            }
-          </div>
-        </div>
-
-        {
-          (prevEntry || nextEntry) && (
-            <nav
-              class="mt-12 flex flex-col items-center justify-between gap-6 border-t border-border/50 pt-8 sm:flex-row"
-              aria-label="Pagination"
+        <article class="w-full max-w-3xl min-w-0">
+          <BackButton className="mb-8" />
+          <header class="mb-12 text-left">
+            <h1 class="mb-6 text-4xl font-extrabold tracking-tight md:text-5xl">
+              {entry.data.title}
+            </h1>
+            <div
+              class="flex items-center justify-start gap-4 text-sm text-muted-foreground"
             >
-              {prevEntry ? (
-                <a
-                  href={`/blog/${prevEntry.id}`}
-                  class="group flex w-full flex-col gap-2 rounded-lg border border-border/50 p-4 text-left transition-colors hover:bg-muted/50 sm:w-1/2 sm:border-transparent"
-                >
-                  <span class="flex items-center gap-1 text-sm text-muted-foreground">
-                    <ChevronLeft className="size-4" />
-                    上一篇
-                  </span>
-                  <span class="line-clamp-2 text-lg font-medium transition-colors group-hover:text-primary">
-                    {prevEntry.data.title}
-                  </span>
-                </a>
-              ) : (
-                <div class="hidden sm:block sm:w-1/2" />
-              )}
+              <div class="flex items-center gap-1.5">
+                <Calendar className="size-4" />
+                <time datetime={entry.data.publishDate.toISOString()}>
+                  {
+                    entry.data.publishDate.toLocaleDateString("zh-CN", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })
+                  }
+                </time>
+              </div>
+              {
+                entry.data.duration && (
+                  <div class="flex items-center gap-1.5">
+                    <Clock className="size-4" />
+                    <span>{entry.data.duration}</span>
+                  </div>
+                )
+              }
+            </div>
+          </header>
 
-              {nextEntry ? (
-                <a
-                  href={`/blog/${nextEntry.id}`}
-                  class="group flex w-full flex-col items-start gap-2 rounded-lg border border-border/50 p-4 text-left transition-colors hover:bg-muted/50 sm:w-1/2 sm:items-end sm:border-transparent sm:text-right"
-                >
-                  <span class="flex items-center gap-1 text-sm text-muted-foreground">
-                    下一篇
-                    <ChevronRight className="size-4" />
-                  </span>
-                  <span class="line-clamp-2 text-left text-lg font-medium transition-colors group-hover:text-primary sm:text-right">
-                    {nextEntry.data.title}
-                  </span>
-                </a>
-              ) : (
-                <div class="hidden sm:block sm:w-1/2" />
-              )}
-            </nav>
-          )
-        }
-      </article>
-      <aside class="hidden w-64 shrink-0 lg:block">
-        <div class="fixed top-36 w-64">
-          {headings.length > 0 && <TableOfContents headings={headings} />}
-        </div>
-      </aside>
+          <div
+            class="prose prose-base mb-12 max-w-none dark:prose-invert prose-headings:font-bold prose-a:text-primary hover:prose-a:text-primary/80"
+          >
+            <Content />
+          </div>
+
+          <div
+            class="mt-8 flex flex-col justify-between gap-6 border-t border-border/50 pt-8 sm:flex-row sm:items-center"
+          >
+            <div class="flex-1">
+              {
+                entry.data.tags && entry.data.tags.length > 0 && (
+                  <div class="flex flex-wrap items-center gap-2">
+                    <span class="mr-2 text-sm font-medium text-muted-foreground">
+                      标签：
+                    </span>
+                    {entry.data.tags.map((tag) => (
+                      <Badge variant="secondary">{tag}</Badge>
+                    ))}
+                  </div>
+                )
+              }
+            </div>
+            <div class="flex items-center gap-2">
+              {
+                shareLinks.map((share) => (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="rounded-full"
+                    asChild
+                  >
+                    <a
+                      href={share.generateUrl(
+                        `${site.url}/blog/${entry.id}`,
+                        entry.data.title,
+                        entry.data.description
+                      )}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={share.linkTitle}
+                      title={share.linkTitle}
+                    >
+                      <SocialIcon name={share.name} className="size-4" />
+                    </a>
+                  </Button>
+                ))
+              }
+            </div>
+          </div>
+
+          {
+            (prevEntry || nextEntry) && (
+              <nav
+                class="mt-12 flex flex-col items-center justify-between gap-6 border-t border-border/50 pt-8 sm:flex-row"
+                aria-label="Pagination"
+              >
+                {prevEntry ? (
+                  <a
+                    href={`/blog/${prevEntry.id}`}
+                    class="group flex w-full flex-col gap-2 rounded-lg border border-border/50 p-4 text-left transition-colors hover:bg-muted/50 sm:w-1/2 sm:border-transparent"
+                  >
+                    <span class="flex items-center gap-1 text-sm text-muted-foreground">
+                      <ChevronLeft className="size-4" />
+                      上一篇
+                    </span>
+                    <span class="line-clamp-2 text-lg font-medium transition-colors group-hover:text-primary">
+                      {prevEntry.data.title}
+                    </span>
+                  </a>
+                ) : (
+                  <div class="hidden sm:block sm:w-1/2" />
+                )}
+
+                {nextEntry ? (
+                  <a
+                    href={`/blog/${nextEntry.id}`}
+                    class="group flex w-full flex-col items-start gap-2 rounded-lg border border-border/50 p-4 text-left transition-colors hover:bg-muted/50 sm:w-1/2 sm:items-end sm:border-transparent sm:text-right"
+                  >
+                    <span class="flex items-center gap-1 text-sm text-muted-foreground">
+                      下一篇
+                      <ChevronRight className="size-4" />
+                    </span>
+                    <span class="line-clamp-2 text-left text-lg font-medium transition-colors group-hover:text-primary sm:text-right">
+                      {nextEntry.data.title}
+                    </span>
+                  </a>
+                ) : (
+                  <div class="hidden sm:block sm:w-1/2" />
+                )}
+              </nav>
+            )
+          }
+        </article>
+        <aside class="hidden w-64 shrink-0 lg:block">
+          <div class="fixed top-36 w-64">
+            {headings.length > 0 && <TableOfContents headings={headings} />}
+          </div>
+        </aside>
+      </div>
+      <BackToTop client:idle />
     </div>
-    <BackToTop client:idle />
-  </div>
-</PageLayout>
+  </Main>
+  <Footer />
+</Layout>

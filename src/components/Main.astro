@@ -1,0 +1,38 @@
+---
+type Props = {
+  pageTitle?: string
+  pageDesc?: string
+  class?: string
+  recordBackUrl?: boolean
+}
+
+const {
+  pageTitle,
+  pageDesc,
+  class: className,
+  recordBackUrl = true,
+} = Astro.props
+
+const backUrl = recordBackUrl ? Astro.url.pathname : undefined
+---
+
+<main
+  id="main-content"
+  data-backurl={backUrl}
+  class:list={["flex flex-grow flex-col pt-20 sm:pt-28", className]}
+>
+  {pageTitle && <h1 class="text-2xl font-semibold sm:text-3xl">{pageTitle}</h1>}
+  {pageDesc && <p class="mt-2 mb-6 italic">{pageDesc}</p>}
+  <slot />
+</main>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const mainContent: HTMLElement | null =
+      document.querySelector("#main-content")
+    const backUrl = mainContent?.dataset?.backurl
+    if (backUrl) {
+      sessionStorage.setItem("backUrl", backUrl)
+    }
+  })
+</script>

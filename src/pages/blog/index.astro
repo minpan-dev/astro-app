@@ -1,5 +1,8 @@
 ---
-import PageLayout from "@/layouts/PageLayout.astro"
+import Layout from "@/layouts/Layout.astro"
+import Header from "@/components/Header.tsx"
+import Main from "@/components/Main.astro"
+import Footer from "@/components/Footer.tsx"
 import { getCollection } from "astro:content"
 import BlogCard from "@/components/BlogCard.tsx"
 
@@ -41,54 +44,58 @@ const years = Object.keys(postsByYearAndMonth)
   .sort((a, b) => b - a)
 ---
 
-<PageLayout>
-  <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-    <div class="mb-12">
-      <h1 class="mb-4 text-4xl font-bold tracking-tight md:text-5xl">博客</h1>
-      <p class="text-xl text-muted-foreground">
-        关于设计与工程的思考、教程和见解。
-      </p>
-    </div>
+<Layout>
+  <Header client:load />
+  <Main>
+    <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+      <div class="mb-12">
+        <h1 class="mb-4 text-4xl font-bold tracking-tight md:text-5xl">博客</h1>
+        <p class="text-xl text-muted-foreground">
+          关于设计与工程的思考、教程和见解。
+        </p>
+      </div>
 
-    <div class="flex flex-col gap-12">
-      {
-        years.map((year) => (
-          <section>
-            <h2 class="mb-8 flex items-center gap-2 text-2xl font-bold tracking-tight text-foreground">
-              {year} 年
-              <span class="flex h-6 items-center justify-center rounded-full bg-muted px-2.5 text-sm font-medium text-muted-foreground">
-                {postsByYearAndMonth[year].count}
-              </span>
-            </h2>
-            <div class="flex flex-col gap-10 pl-4 sm:pl-8">
-              {Object.entries(postsByYearAndMonth[year].months).map(
-                ([month, data]) => (
-                  <div class="flex flex-col sm:flex-row sm:items-start sm:gap-8 lg:gap-12">
-                    <h3 class="mb-4 flex w-32 flex-shrink-0 items-center gap-2 text-lg font-bold text-foreground sm:mt-1 sm:mb-0">
-                      {month}
-                      <span class="flex h-5 items-center justify-center rounded-full bg-muted px-2 text-xs font-medium text-muted-foreground">
-                        {data.count}
-                      </span>
-                    </h3>
-                    <div class="flex flex-grow flex-col gap-8">
-                      {data.posts.map((post) => (
-                        <BlogCard
-                          title={post.data.title}
-                          description={post.data.description}
-                          date={post.data.publishDate}
-                          slug={post.id}
-                          tags={post.data.tags}
-                          readingTime={post.data.duration}
-                        />
-                      ))}
+      <div class="flex flex-col gap-12">
+        {
+          years.map((year) => (
+            <section>
+              <h2 class="mb-8 flex items-center gap-2 text-2xl font-bold tracking-tight text-foreground">
+                {year} 年
+                <span class="flex h-6 items-center justify-center rounded-full bg-muted px-2.5 text-sm font-medium text-muted-foreground">
+                  {postsByYearAndMonth[year].count}
+                </span>
+              </h2>
+              <div class="flex flex-col gap-10 pl-4 sm:pl-8">
+                {Object.entries(postsByYearAndMonth[year].months).map(
+                  ([month, data]) => (
+                    <div class="flex flex-col sm:flex-row sm:items-start sm:gap-8 lg:gap-12">
+                      <h3 class="mb-4 flex w-32 flex-shrink-0 items-center gap-2 text-lg font-bold text-foreground sm:mt-1 sm:mb-0">
+                        {month}
+                        <span class="flex h-5 items-center justify-center rounded-full bg-muted px-2 text-xs font-medium text-muted-foreground">
+                          {data.count}
+                        </span>
+                      </h3>
+                      <div class="flex flex-grow flex-col gap-8">
+                        {data.posts.map((post) => (
+                          <BlogCard
+                            title={post.data.title}
+                            description={post.data.description}
+                            date={post.data.publishDate}
+                            slug={post.id}
+                            tags={post.data.tags}
+                            readingTime={post.data.duration}
+                          />
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )
-              )}
-            </div>
-          </section>
-        ))
-      }
+                  )
+                )}
+              </div>
+            </section>
+          ))
+        }
+      </div>
     </div>
-  </div>
-</PageLayout>
+  </Main>
+  <Footer />
+</Layout>
