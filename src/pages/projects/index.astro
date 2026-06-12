@@ -1,7 +1,7 @@
 ---
-import Layout from "../../layouts/main.astro"
+import Layout from "@/layouts/main.astro"
 import { getCollection } from "astro:content"
-import ProjectCard from "../../components/ProjectCard.tsx"
+import ProjectCard from "@/components/ProjectCard.tsx"
 
 const allProjects = await getCollection("projects")
 const sortedProjects = allProjects.sort(

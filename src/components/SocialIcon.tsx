@@ -2,7 +2,7 @@ import React from "react"
 import { Mail, Rss } from "lucide-react"
 import { SiGithub, SiX, SiSinaweibo, SiZhihu, SiBilibili } from "react-icons/si"
 import { FaQq } from "react-icons/fa"
-import type { SocialName, ShareName } from "../types/config"
+import type { SocialName, ShareName } from "@/types/config"
 
 export interface SocialIconProps {
   name: SocialName | ShareName

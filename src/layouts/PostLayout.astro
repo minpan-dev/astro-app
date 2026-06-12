@@ -1,15 +1,15 @@
 ---
 import { render } from "astro:content"
 import type { CollectionEntry } from "astro:content"
-import Layout from "./main.astro"
-import { Badge } from "../components/ui/badge"
-import { Button } from "../components/ui/button"
-import SiteBreadcrumb from "../components/SiteBreadcrumb.astro"
-import BackToTop from "../components/BackToTop"
-import TableOfContents from "../components/TableOfContents.astro"
+import Layout from "@/layouts/main.astro"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import SiteBreadcrumb from "@/components/SiteBreadcrumb.astro"
+import BackToTop from "@/components/BackToTop"
+import TableOfContents from "@/components/TableOfContents.astro"
 import { Calendar, Clock, ChevronLeft, ChevronRight } from "lucide-react"
-import { SocialIcon } from "../components/SocialIcon"
-import config from "../config"
+import { SocialIcon } from "@/components/SocialIcon"
+import config from "@/config"
 
 export interface Props {
   entry: CollectionEntry<"blog">

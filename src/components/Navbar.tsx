@@ -7,8 +7,8 @@ import {
   SheetTrigger,
   SheetTitle,
 } from "@/components/ui/sheet"
-import { ThemeToggle } from "./ThemeToggle"
-import { SocialIcon } from "./SocialIcon"
+import { ThemeToggle } from "@/components/ThemeToggle"
+import { SocialIcon } from "@/components/SocialIcon"
 import config from "@/config"
 const { site, navLinks, socials } = config
 

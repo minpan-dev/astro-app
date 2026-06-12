@@ -1,4 +1,4 @@
-import { defineConfig } from "./types/config"
+import { defineConfig } from "@/types/config"
 
 const config = defineConfig({
   site: {
