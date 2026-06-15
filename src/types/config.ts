@@ -13,6 +13,10 @@ export interface SiteConfig {
   dir?: "ltr" | "rtl"
   /** Path to favicon (default: "/favicon.svg") */
   favicon?: string
+  /** Path to logo (default: "/logo.png") */
+  logo?: string
+  /** Path to dark mode logo (default: "/logo-dark.png") */
+  logoDark?: string
   /** Fallback OG image (default: "/og.png") */
   ogImage?: string
   /** Theme color for mobile browsers */

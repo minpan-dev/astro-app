@@ -15,12 +15,31 @@ const navbarSocials = socials.filter((social) => social.showInNavbar)
 >
   <div class="box-border w-full px-5 py-4 sm:px-8 sm:py-5">
     <div class="flex items-center justify-between">
-      <div class="flex-shrink-0">
+      <div class="flex flex-shrink-0 items-center">
         <a
           href="/"
-          class="text-2xl font-bold text-foreground transition-colors hover:text-foreground/80"
+          class="flex items-center text-2xl font-bold text-foreground transition-colors hover:text-foreground/80"
         >
-          {site.title}
+          {
+            site.logo ? (
+              <>
+                <img
+                  src={site.logo}
+                  alt={site.title}
+                  class="h-8 w-auto dark:hidden"
+                />
+                {site.logoDark && (
+                  <img
+                    src={site.logoDark}
+                    alt={site.title}
+                    class="hidden h-8 w-auto dark:block"
+                  />
+                )}
+              </>
+            ) : (
+              site.title
+            )
+          }
         </a>
       </div>
 

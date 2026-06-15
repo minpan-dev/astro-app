@@ -9,6 +9,8 @@ const config = defineConfig({
     url: "https://minpan.dev",
     lang: "zh-CN",
     favicon: "/favicon.svg",
+    logo: "/logo.png",
+    logoDark: "/logo-dark.png",
     ogImage: "/og.png",
     themeColor: "#ffffff",
     timezone: "Asia/Shanghai",
